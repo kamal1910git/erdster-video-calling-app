@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import ToggleFullScreen from './ToggleFullScreen'
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const Communication = props =>
   <div className="auth">
@@ -20,6 +21,12 @@ const Communication = props =>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" className="svg">
           <path className="on" d="M40 8H15.64l8 8H28v4.36l1.13 1.13L36 16v12.36l7.97 7.97L44 36V12c0-2.21-1.79-4-4-4zM4.55 2L2 4.55l4.01 4.01C4.81 9.24 4 10.52 4 12v24c0 2.21 1.79 4 4 4h29.45l4 4L44 41.46 4.55 2zM12 16h1.45L28 30.55V32H12V16z" fill="white"></path>
           <path className="off" d="M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zm-4 24l-8-6.4V32H12V16h16v6.4l8-6.4v16z" fill="white"></path>
+        </svg>
+      </button>
+      <button onClick={props.toggleRecord} className={'record-button-true'}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" className="svg">
+          <path className="on" d="M83.9,73.8v3.8H66.3v-3.8c0-2.4,1.9-4.3,4.3-4.3h9C82,69.4,83.9,71.4,83.9,73.8z" fill="white"></path>
+          <path className="off" d="M83.9,73.8v3.8H66.3v-3.8c0-2.4,1.9-4.3,4.3-4.3h9C82,69.4,83.9,71.4,83.9,73.8z" fill="white"></path>
         </svg>
       </button>
       <button onClick={ToggleFullScreen} className="fullscreen-button">
@@ -52,7 +59,12 @@ const Communication = props =>
       <Link  className="primary-button" to="/">OK</Link>
     </div>
     <div className="waiting">
-      <p><span>Please share this link to someone join this room:&nbsp;</span><a href={window.location.href}>Click to share</a><br/>
+      <p><span>Please share this link to someone join this room:&nbsp;</span>
+      <CopyToClipboard text={window.location.href}
+          onCopy={() =>  alert('Copied..')}>
+          <a>Click here to copy the link</a>
+        </CopyToClipboard>
+      <br/>
       <span className="remote-left">The remote side hung up.</span></p>
     </div>
   </div>
@@ -63,6 +75,7 @@ Communication.propTypes = {
   video: React.PropTypes.bool.isRequired,
   toggleVideo: React.PropTypes.func.isRequired,
   toggleAudio: React.PropTypes.func.isRequired,
+  toggleRecord: React.PropTypes.func.isRequired,
   getContent: React.PropTypes.func.isRequired,
   send: React.PropTypes.func.isRequired,
   handleHangup: React.PropTypes.func.isRequired,

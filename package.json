@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "prod": "NODE_ENV=production node server.js",
+    "prod": "NODE_ENV=development node server.js",
     "postinstall": "webpack -p --config ./webpack.config.js --progress"
   },
   "author": "",
@@ -30,6 +30,7 @@
     "express-session": "^1.14.1",
     "react": "^15.3.1",
     "react-bootstrap": "^0.32.1",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^15.3.1",
     "react-redux": "^4.4.5",
     "react-router": "^2.7.0",
