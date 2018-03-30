@@ -131,10 +131,38 @@ export default class MediaBridge extends React.Component {
     }  
   }
   render(){
+
+var RecordRTC = require('recordrtc');
+  function successCallback(stream){
+  var vid = document.querySelector('video');
+  vid.src = URL.createObjectURL(stream);
+  vid.muted = true;
+  var recorder = RecordRTC(stream, {
+  type: 'video'
+});
+
+recorder.startRecording();
+
+setTimeout(function(){
+  recorder.stopRecording(function(){
+    var blob = recorder.blob;
+    var url = URL.createObjectURL(blob);
+    vid.src = url;
+    vid.muted = false;
+    });
+  }, 5 * 1000);
+}
+
+
+
+function errorCallback(error){
+  alert(error);
+}
+
     return (
       <div className={`media-bridge ${this.state.bridge}`}>
-        <video className="remote-video" ref={(ref) => this.remoteVideo = ref} autoPlay playsinline></video>
-        <video className="local-video" ref={(ref) => this.localVideo = ref} autoPlay muted playsinline></video>
+        <video id='remote-video' className="remote-video" ref={(ref) => this.remoteVideo = ref} autoPlay playsInline></video>
+        <video id='local-video' className="local-video" ref={(ref) => this.localVideo = ref} autoPlay muted playsInline></video>
       </div>
     );
   }

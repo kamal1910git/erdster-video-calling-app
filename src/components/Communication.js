@@ -25,8 +25,8 @@ const Communication = props =>
       </button>
       <button onClick={props.toggleRecord} className={'record-button-true'}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" className="svg">
-          <path className="on" d="M83.9,73.8v3.8H66.3v-3.8c0-2.4,1.9-4.3,4.3-4.3h9C82,69.4,83.9,71.4,83.9,73.8z" fill="white"></path>
-          <path className="off" d="M83.9,73.8v3.8H66.3v-3.8c0-2.4,1.9-4.3,4.3-4.3h9C82,69.4,83.9,71.4,83.9,73.8z" fill="white"></path>
+          <path className="on" d="M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zm-4 24l-8-6.4V32H12V16h16v6.4l8-6.4v16z" fill="white"></path>
+          <path className="off" d="M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zm-4 24l-8-6.4V32H12V16h16v6.4l8-6.4v16z" fill="white"></path>
         </svg>
       </button>
       <button onClick={ToggleFullScreen} className="fullscreen-button">

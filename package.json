@@ -34,6 +34,7 @@
     "react-dom": "^15.3.1",
     "react-redux": "^4.4.5",
     "react-router": "^2.7.0",
+    "recordrtc": "^5.4.6",
     "redux": "^3.6.0",
     "remarkable": "^1.6.2",
     "serve-favicon": "^2.3.0",
