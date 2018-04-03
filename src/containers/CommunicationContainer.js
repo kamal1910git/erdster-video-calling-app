@@ -80,12 +80,6 @@ class CommunicationContainer extends React.Component {
     this.setState({audio: audio});
     this.props.setAudio(audio);
   }
-  toggleRecord = () => {
-    alert('Recording started..');
-    //const record = this.localStream.getVideoTracks()[0].enabled = !this.state.record;
-    //this.setState({record: record});
-    //this.props.setVideo(record);
-  }
   handleHangup = () => this.props.media.hangup()
   render(){
     return (

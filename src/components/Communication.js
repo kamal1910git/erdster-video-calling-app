@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import ToggleFullScreen from './ToggleFullScreen'
+import Recorder from '../components/Recording';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const Communication = props =>
@@ -22,13 +23,7 @@ const Communication = props =>
           <path className="on" d="M40 8H15.64l8 8H28v4.36l1.13 1.13L36 16v12.36l7.97 7.97L44 36V12c0-2.21-1.79-4-4-4zM4.55 2L2 4.55l4.01 4.01C4.81 9.24 4 10.52 4 12v24c0 2.21 1.79 4 4 4h29.45l4 4L44 41.46 4.55 2zM12 16h1.45L28 30.55V32H12V16z" fill="white"></path>
           <path className="off" d="M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zm-4 24l-8-6.4V32H12V16h16v6.4l8-6.4v16z" fill="white"></path>
         </svg>
-      </button>
-      <button onClick={props.toggleRecord} className={'record-button-true'}>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" className="svg">
-          <path className="on" d="M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zm-4 24l-8-6.4V32H12V16h16v6.4l8-6.4v16z" fill="white"></path>
-          <path className="off" d="M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zm-4 24l-8-6.4V32H12V16h16v6.4l8-6.4v16z" fill="white"></path>
-        </svg>
-      </button>
+      </button>      
       <button onClick={ToggleFullScreen} className="fullscreen-button">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" className="svg">
           <path className="on" d="M10 32h6v6h4V28H10v4zm6-16h-6v4h10V10h-4v6zm12 22h4v-6h6v-4H28v10zm4-22v-6h-4v10h10v-4h-6z" fill="white"></path>
@@ -40,6 +35,7 @@ const Communication = props =>
           <path d="M24 18c-3.21 0-6.3.5-9.2 1.44v6.21c0 .79-.46 1.47-1.12 1.8-1.95.98-3.74 2.23-5.33 3.7-.36.35-.85.57-1.4.57-.55 0-1.05-.22-1.41-.59L.59 26.18c-.37-.37-.59-.87-.59-1.42 0-.55.22-1.05.59-1.42C6.68 17.55 14.93 14 24 14s17.32 3.55 23.41 9.34c.37.36.59.87.59 1.42 0 .55-.22 1.05-.59 1.41l-4.95 4.95c-.36.36-.86.59-1.41.59-.54 0-1.04-.22-1.4-.57-1.59-1.47-3.38-2.72-5.33-3.7-.66-.33-1.12-1.01-1.12-1.8v-6.21C30.3 18.5 27.21 18 24 18z" fill="white"></path>
         </svg>
       </button>
+      <Recorder />
     </div>
     <form className="request-access">
       <p><span className="you-left">You hung up.&nbsp;</span>Say Hi to join the room.</p>
