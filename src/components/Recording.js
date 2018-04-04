@@ -1,11 +1,8 @@
 import React from 'react';
-import { captureUserMedia, S3Upload } from './AppUtils';
+import { S3Upload } from './AppUtils';
 import Webcam from '../containers/MediaContainer';
 import RecordRTC from 'recordrtc';
 import { Modal } from 'react-bootstrap';
-
-const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-                        navigator.mozGetUserMedia || navigator.msGetUserMedia);
 
 class Recording extends React.Component {
   constructor(props) {
@@ -23,11 +20,7 @@ class Recording extends React.Component {
     this.stopRecord = this.stopRecord.bind(this);
   }
 
-  componentDidMount() {
-    if(!hasGetUserMedia) {
-      alert("Your browser cannot stream from your webcam. Please switch to Chrome or Firefox.");
-      return;
-    }
+  componentDidMount() { 
     this.requestUserMedia();
   }
 

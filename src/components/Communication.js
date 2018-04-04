@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import ToggleFullScreen from './ToggleFullScreen'
-import Recorder from '../components/Recording';
+//import Recorder from '../components/Recording';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const Communication = props =>
@@ -35,7 +35,6 @@ const Communication = props =>
           <path d="M24 18c-3.21 0-6.3.5-9.2 1.44v6.21c0 .79-.46 1.47-1.12 1.8-1.95.98-3.74 2.23-5.33 3.7-.36.35-.85.57-1.4.57-.55 0-1.05-.22-1.41-.59L.59 26.18c-.37-.37-.59-.87-.59-1.42 0-.55.22-1.05.59-1.42C6.68 17.55 14.93 14 24 14s17.32 3.55 23.41 9.34c.37.36.59.87.59 1.42 0 .55-.22 1.05-.59 1.41l-4.95 4.95c-.36.36-.86.59-1.41.59-.54 0-1.04-.22-1.4-.57-1.59-1.47-3.38-2.72-5.33-3.7-.66-.33-1.12-1.01-1.12-1.8v-6.21C30.3 18.5 27.21 18 24 18z" fill="white"></path>
         </svg>
       </button>
-      <Recorder />
     </div>
     <form className="request-access">
       <p><span className="you-left">You hung up.&nbsp;</span>Say Hi to join the room.</p>
@@ -71,7 +70,6 @@ Communication.propTypes = {
   video: React.PropTypes.bool.isRequired,
   toggleVideo: React.PropTypes.func.isRequired,
   toggleAudio: React.PropTypes.func.isRequired,
-  toggleRecord: React.PropTypes.func.isRequired,
   getContent: React.PropTypes.func.isRequired,
   send: React.PropTypes.func.isRequired,
   handleHangup: React.PropTypes.func.isRequired,

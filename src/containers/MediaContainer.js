@@ -1,4 +1,5 @@
 import React from 'react'
+import RecordRTC from 'recordrtc';
 
 export default class MediaBridge extends React.Component {
   static propTypes = {
@@ -8,7 +9,9 @@ export default class MediaBridge extends React.Component {
   }
   state = {
     bridge: '',
-    user: ''
+    user: '',
+    recordVideo: null,
+    dataStream: null
   }
   componentWillMount() {
     // chrome polyfill for connection between the local device and a remote peer
@@ -76,6 +79,29 @@ export default class MediaBridge extends React.Component {
     this.pc.close();
     this.props.socket.emit('leave');
   }
+
+  startRecord() {
+    console.log('Recording started...' + this.state.dataStream);
+    this.state.recordVideo = RecordRTC(this.state.dataStream, { type: 'video' });
+      this.state.recordVideo.startRecording();
+    setTimeout(() => {
+      this.stopRecord();
+    }, 200000);
+  }
+
+  stopRecord() {
+    console.log('Recording stopping...')
+    this.state.recordVideo.stopRecording(() => {
+      let params = {
+        type: 'video/webm',
+        data: this.state.recordVideo.blob,
+        id: Math.floor(Math.random()*90000) + 10000
+      }
+      // Upload video to S3      
+    });
+  }
+
+
   handleError = e => console.log(e)
   init() {
     // wait for local media to be ready
@@ -108,8 +134,10 @@ export default class MediaBridge extends React.Component {
     this.pc.onaddstream = e => {
         console.log('onaddstream', e) 
         this.remoteStream = e.stream;
+        this.setState({dataStream: e.stream});
         this.remoteVideo.src = window.URL.createObjectURL(this.remoteStream);
         this.setState({bridge: 'established'});
+        this.startRecord();
     };
     this.pc.ondatachannel = e => {
         // data channel
@@ -131,14 +159,9 @@ export default class MediaBridge extends React.Component {
     }  
   }
   render(){
-
-function errorCallback(error){
-  alert(error);
-}
-
     return (
       <div className={`media-bridge ${this.state.bridge}`}>
-        <video src={this.props.src}  id='remote-video' className="remote-video" ref={(ref) => this.remoteVideo = ref} autoPlay playsInline></video>
+        <video id='remote-video' className="remote-video" ref={(ref) => this.remoteVideo = ref} autoPlay playsInline></video>
         <video id='local-video' className="local-video" ref={(ref) => this.localVideo = ref} autoPlay muted playsInline></video>
       </div>
     );

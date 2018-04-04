@@ -1,12 +1,5 @@
 
-export function captureUserMedia(callback) {
-    var params = { audio: false, video: true };
-  
-    navigator.getUserMedia(params, callback, (error) => {
-      alert(JSON.stringify(error));
-    });
-  };
-  
+
   // handle S3 upload
   function getSignedUrl(file) {
     let queryString = '?objectName=' + file.id + '&contentType=' + encodeURIComponent(file.type);
