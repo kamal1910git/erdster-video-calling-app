@@ -15,6 +15,7 @@
   "author": "",
   "license": "",
   "dependencies": {
+    "aws-sdk": "^2.221.1",
     "babel-loader": "^6.2.5",
     "babel-plugin-transform-class-properties": "^6.11.5",
     "babel-plugin-transform-runtime": "^6.12.0",
