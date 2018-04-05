@@ -5,6 +5,7 @@
     let queryString = '?objectName=' + file.id + '&contentType=' + encodeURIComponent(file.type);
     return fetch('/s3/sign' + queryString)
     .then((response) => {
+      console.log('response: ', response.json());
       return response.json();
     })
     .catch((err) => {
@@ -31,6 +32,8 @@
     return new Promise((resolve, reject) => {
       getSignedUrl(fileInfo)
       .then((s3Info) => {
+        console.log("s3Info:" + s3Info);
+        console.log("fileInfo:" + fileInfo);
         // upload to S3
         var xhr = createCORSRequest('PUT', s3Info.signedUrl);
   
