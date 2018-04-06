@@ -44,7 +44,7 @@ input[type=text] {
 .fullscreen-button {
     width: 3em;
     height: 3em;
-    border-radius: 50%;
+    border-radius: 25%;
     background: rgba(44, 44, 44, 0.6);
     display: flex;
     align-items: center;
@@ -105,8 +105,8 @@ input[type=text] {
 }
 /* deeper elements */
 :-webkit-full-screen video {
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 50%;
 }
 .guest-hangup + .auth .you-left {
     display: inline;
@@ -122,29 +122,27 @@ input[type=text] {
 }
 .remote-video {
     display: block;
-    max-height: 100%;
-    max-width: 100%;
+    max-height: 50%;
+    max-width: 50%;
     object-fit: cover;
 }
 .local-video {
-    max-height: 100%;
-    max-width: 100%;
+    max-height: 50%;
+    max-width: 50%;
     object-fit: cover;
     transition: all .3s;
 }
-.established .local-video {
-	margin: 10px;
-    max-height: 17%;
-    max-width: 17%;
-    height: auto;
-    width: auto;
+.established .local-video {	
+    max-height: 50%;
+    max-width: 50%;
+    object-fit: cover;
 }
 .media-bridge,
 .local-video,
 .remote-video {
     position: absolute;
-    height: 100%;
-    width: 100%;
+    height: 50%;
+    width: 50%;
 }
 .auth {
     position: absolute;
