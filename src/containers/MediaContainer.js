@@ -125,11 +125,23 @@ export default class MediaBridge extends React.Component {
         .then(this.sendDescription)
         .catch(this.handleError); // An error occurred, so handle the failure to connect
     }
+
     // set up the peer connection
     // this is one of Google's public STUN servers
     // make sure your offer/answer role does not change. If user A does a SLD
     // with type=offer initially, it must do that during  the whole session
-    this.pc = new RTCPeerConnection({iceServers: [{url: 'stun:stun.l.google.com:19302'}]});
+    this.pc = new RTCPeerConnection({iceServers: [
+      {urls: ["turn:173.194.72.127:19305?transport=udp",
+        "turn:[2404:6800:4008:C01::7F]:19305?transport=udp",
+        "turn:173.194.72.127:443?transport=tcp",
+        "turn:[2404:6800:4008:C01::7F]:443?transport=tcp"
+        ],
+      username:"CKjCuLwFEgahxNRjuTAYzc/s6OMT",
+      credential:"u1SQDR/SQsPQIxXNWQT7czc/G4c="
+      },
+      { url: 'stun:stun.l.google.com:19302'}
+    ]});
+
     // when our browser gets a candidate, send it to the peer
     this.pc.onicecandidate = e => {
         console.log(e, 'onicecandidate');
