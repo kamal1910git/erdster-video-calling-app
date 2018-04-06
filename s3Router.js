@@ -40,7 +40,8 @@ function S3Router(options) {
       console.log('data: ', data)
       res.json({
         signedUrl: data,
-        publicUrl: 'https://s3.amazonaws.com/'+ S3_BUCKET + '/' + fileKey,
+        //publicUrl: 'https://s3.amazonaws.com/'+ S3_BUCKET + '/' + fileKey,
+        publicUrl: 'https://' + S3_BUCKET + '.s3.amazonaws.com/' + fileKey,
         filename: filename
       });
     });

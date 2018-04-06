@@ -23,10 +23,12 @@ app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res) => res.sendFile(__dirname + '/public/index.html'));
 app.use(favicon('./public/favicon.ico'));
+
 app.use('/s3', s3Router({
   bucket: 'erdstervideo',
-  ACL: 'public-read'
+  ACL: 'public-read-write'
 }))
+
 // Switch off the default 'X-Powered-By: Express' header
 app.disable('x-powered-by');
 io.sockets.on('connection', socket => {
