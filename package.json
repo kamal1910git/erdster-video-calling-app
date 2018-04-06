@@ -15,6 +15,7 @@
   "author": "",
   "license": "",
   "dependencies": {
+    "@sendgrid/mail": "^6.2.1",
     "aws-sdk": "^2.221.1",
     "babel-loader": "^6.2.5",
     "babel-plugin-transform-class-properties": "^6.11.5",
