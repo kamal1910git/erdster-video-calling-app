@@ -99,8 +99,8 @@ input[type=text] {
 }
 /* deeper elements */
 :-webkit-full-screen video {
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 50%;
 }
 .guest-hangup + .auth .you-left {
     display: inline;
@@ -118,37 +118,45 @@ input[type=text] {
     display: block;
     max-height: 100%;
     max-width: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 .local-video {
     max-height: 100%;
     max-width: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: all .3s;
 }
 .established .local-video {
-	margin: 10px;
-    max-height: 17%;
-    max-width: 17%;
-    height: auto;
-    width: auto;
+	vertical-align: top !important;
+    float: right;
 }
-.media-bridge,
-.local-video,
-.remote-video {
-    position: absolute;
+.media-bridge {
     height: 100%;
     width: 100%;
 }
+.local-video {
+    height: 50%;
+    width: 45%;
+    vertical-align: top !important;
+    float: right;
+    padding:10px;
+}
+.remote-video {
+    height: 50%;
+    width: 45%;
+    float: left;
+    vertical-align: top !important;
+    padding:10px;
+}
 .auth {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center
+    justify-content: center;
 }
 .primary-button {
     text-decoration: none;
