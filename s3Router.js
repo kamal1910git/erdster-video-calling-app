@@ -16,10 +16,18 @@ function S3Router(options) {
   }
 
   router.get('/sign', function(req, res) {
+    
     var filename = req.query.objectName;
     var mimeType = req.query.contentType;
     var ext = '.' + findType(mimeType);
     var fileKey = filename + ext;
+
+    console.log('filename ' + filename);
+    
+    aws.config = new aws.Config();
+    aws.config.accessKeyId = process.env.AWS_ACCESS_KEY_ID;
+    aws.config.secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY; 
+    aws.config.region = process.env.AWS_REGION;
 
     var s3 = new aws.S3();
 
@@ -32,15 +40,15 @@ function S3Router(options) {
     };
 
     s3.getSignedUrl('putObject', params, function(err, data) {
+      console.log('putObject ' + params);
       if (err) {
-        console.log(err);
-        return res.send(500, "Cannot create S3 signed URL");
+        console.log('Error putObject' + err);
+        return res.status(status).send(body);
       }
 
       console.log('data: ', data)
-      res.json({
+      return res.json({
         signedUrl: data,
-        //publicUrl: 'https://s3.amazonaws.com/'+ S3_BUCKET + '/' + fileKey,
         publicUrl: 'https://' + S3_BUCKET + '.s3.amazonaws.com/' + fileKey,
         filename: filename
       });

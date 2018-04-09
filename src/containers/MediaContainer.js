@@ -102,9 +102,9 @@ export default class MediaBridge extends React.Component {
       // Upload video to S3   
       S3Upload(params)
       .then((success) => {
-        console.log('enter then statement')
+        console.log('enter then statement');
         if(success) {
-          console.log(success)
+          console.log(success);
         }
       }, (error) => {
         alert(error, 'error occurred. check your aws settings and try again.');

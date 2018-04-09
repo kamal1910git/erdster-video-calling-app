@@ -6,6 +6,7 @@ import https from 'https';
 import sio from 'socket.io';
 import favicon from 'serve-favicon';
 import compression from 'compression';
+import bodyParser from 'body-parser';
 import s3Router from './s3Router';
 
 const app = express(),
@@ -21,13 +22,21 @@ const app = express(),
 // compress all requests
 app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use((req, res) => res.sendFile(__dirname + '/public/index.html'));
-app.use(favicon('./public/favicon.ico'));
+
+app.use(function(req, res, next) {
+  console.log(req.path);
+  next();
+});
+
+app.use(bodyParser.json());
 
 app.use('/s3', s3Router({
   bucket: 'erdstervideo',
-  ACL: 'public-read-write'
-}))
+  ACL: 'public-read'
+}));
+
+app.use((req, res) => res.sendFile(__dirname + '/public/index.html'));
+app.use(favicon('./public/favicon.ico'));
 
 // Switch off the default 'X-Powered-By: Express' header
 app.disable('x-powered-by');
