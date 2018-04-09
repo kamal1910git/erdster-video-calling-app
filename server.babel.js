@@ -20,13 +20,18 @@ const app = express(),
     http.createServer(app).listen(port) :
     https.createServer(options, app).listen(port),
   io = sio(server);
+
+  
+app.use(cors());
+app.options('*', cors());
+
 // compress all requests
 app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
   var responseSettings = {
-    "AccessControlAllowOrigin": "https://videocallingapp.herokuapp.com",
+    "AccessControlAllowOrigin": "*",
     "AccessControlAllowHeaders": "Content-Type,X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,  Date, X-Api-Version, X-File-Name",
     "AccessControlAllowMethods": "POST, GET, PUT, DELETE, OPTIONS",
     "AccessControlAllowCredentials": true
@@ -48,9 +53,6 @@ else {
 }
 
 });
-
-app.use(cors());
-app.options('*', cors());
 
 app.use(bodyParser.json());
 
