@@ -21,10 +21,6 @@ const app = express(),
     https.createServer(options, app).listen(port),
   io = sio(server);
 
-  
-app.use(cors());
-app.options('*', cors());
-
 // compress all requests
 app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -53,6 +49,9 @@ else {
 }
 
 });
+  
+app.use(cors());
+app.options('*', cors());
 
 app.use(bodyParser.json());
 
