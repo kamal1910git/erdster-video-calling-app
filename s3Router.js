@@ -36,17 +36,15 @@ function S3Router(options) {
       Key: fileKey,
       Expires: 600,
       ContentType: mimeType,
-      ACL: options.ACL || 'private'
+      ACL: options.ACL || 'public-read'
     };
 
     s3.getSignedUrl('putObject', params, function(err, data) {
-      console.log('putObject ' + params);
       if (err) {
         console.log('Error putObject' + err);
         return res.status(status).send(body);
       }
 
-      console.log('data: ', data)
       return res.json({
         signedUrl: data,
         publicUrl: 'https://' + S3_BUCKET + '.s3.amazonaws.com/' + fileKey,
