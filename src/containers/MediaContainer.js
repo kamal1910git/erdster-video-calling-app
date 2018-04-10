@@ -215,8 +215,8 @@ export default class MediaBridge extends React.Component {
   render(){
     return (
       <div className={`media-bridge ${this.state.bridge}`}>
-        <video id='remote-video' className="remote-video" ref={(ref) => this.remoteVideo = ref} autoPlay playsInline></video>
-        <video id='local-video' className="local-video" ref={(ref) => this.localVideo = ref} autoPlay muted playsInline></video>
+        <video id='remote-video' className="remote-video" ref={(ref) => this.remoteVideo = ref} autoPlay playsinline></video>
+        <video id='local-video' className="local-video" ref={(ref) => this.localVideo = ref} autoPlay muted playsinline></video>
       </div>      
     );
   }
