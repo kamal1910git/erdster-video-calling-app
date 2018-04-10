@@ -15,43 +15,36 @@ const app = express(),
     key: fs.readFileSync(__dirname + '/rtc-video-room-key.pem'),
     cert: fs.readFileSync(__dirname + '/rtc-video-room-cert.pem')
   },
+
   port = process.env.PORT || 3000,
   server = process.env.NODE_ENV === 'production' ?
     http.createServer(app).listen(port) :
     https.createServer(options, app).listen(port),
   io = sio(server);
 
+app.use(cors());
+app.options('*', cors());
+
 // compress all requests
 app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
-  var responseSettings = {
-    "AccessControlAllowOrigin": "*",
-    "AccessControlAllowHeaders": "Content-Type,X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,  Date, X-Api-Version, X-File-Name",
-    "AccessControlAllowMethods": "POST, GET, PUT, DELETE, OPTIONS",
-    "AccessControlAllowCredentials": true
-};
 
-/**
- * Headers
- */
-res.header("Access-Control-Allow-Credentials", responseSettings.AccessControlAllowCredentials);
-res.header("Access-Control-Allow-Origin",  responseSettings.AccessControlAllowOrigin);
-res.header("Access-Control-Allow-Headers", (req.headers['access-control-request-headers']) ? req.headers['access-control-request-headers'] : "x-requested-with");
-res.header("Access-Control-Allow-Methods", (req.headers['access-control-request-method']) ? req.headers['access-control-request-method'] : responseSettings.AccessControlAllowMethods);
+  const origin = req.get('origin');
+
+  res.header('Access-Control-Allow-Origin', origin);
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma');
 
 if ('OPTIONS' == req.method) {
-    res.send(200);
+  res.sendStatus(204);
 }
 else {
     next();
-}
-
+  }
 });
-  
-app.use(cors());
-app.options('*', cors());
 
 app.use(bodyParser.json());
 
