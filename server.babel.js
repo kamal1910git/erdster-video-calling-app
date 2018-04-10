@@ -6,6 +6,8 @@ import https from 'https';
 import sio from 'socket.io';
 import favicon from 'serve-favicon';
 import compression from 'compression';
+import bodyParser from 'body-parser';
+import cors from 'cors';
 import s3Router from './s3Router';
 
 const app = express(),
@@ -18,16 +20,48 @@ const app = express(),
     http.createServer(app).listen(port) :
     https.createServer(options, app).listen(port),
   io = sio(server);
+
 // compress all requests
 app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use((req, res) => res.sendFile(__dirname + '/public/index.html'));
-app.use(favicon('./public/favicon.ico'));
+
+app.use(function(req, res, next) {
+  var responseSettings = {
+    "AccessControlAllowOrigin": "*",
+    "AccessControlAllowHeaders": "Content-Type,X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,  Date, X-Api-Version, X-File-Name",
+    "AccessControlAllowMethods": "POST, GET, PUT, DELETE, OPTIONS",
+    "AccessControlAllowCredentials": true
+};
+
+/**
+ * Headers
+ */
+res.header("Access-Control-Allow-Credentials", responseSettings.AccessControlAllowCredentials);
+res.header("Access-Control-Allow-Origin",  responseSettings.AccessControlAllowOrigin);
+res.header("Access-Control-Allow-Headers", (req.headers['access-control-request-headers']) ? req.headers['access-control-request-headers'] : "x-requested-with");
+res.header("Access-Control-Allow-Methods", (req.headers['access-control-request-method']) ? req.headers['access-control-request-method'] : responseSettings.AccessControlAllowMethods);
+
+if ('OPTIONS' == req.method) {
+    res.send(200);
+}
+else {
+    next();
+}
+
+});
+  
+app.use(cors());
+app.options('*', cors());
+
+app.use(bodyParser.json());
 
 app.use('/s3', s3Router({
   bucket: 'erdstervideo',
-  ACL: 'public-read-write'
-}))
+  ACL: 'public-read'
+}));
+
+app.use((req, res) => res.sendFile(__dirname + '/public/index.html'));
+app.use(favicon('./public/favicon.ico'));
 
 // Switch off the default 'X-Powered-By: Express' header
 app.disable('x-powered-by');
