@@ -55,7 +55,6 @@
         xhr.setRequestHeader('Content-Type', fileInfo.type);
         xhr.setRequestHeader('x-amz-acl', 'public-read');
   
-        console.log('fileinfo data ' + fileInfo.data);
         return xhr.send(fileInfo.data);
       })
     })
