@@ -23,9 +23,6 @@ const Communication = props =>
           <path className="off" d="M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zm-4 24l-8-6.4V32H12V16h16v6.4l8-6.4v16z" fill="white"></path>
         </svg>
       </button>      
-      <button onClick={props.toggleRecord} className={'record-button-' + props.record}>          
-        <img style={{width: '50', height:'50' }} src= {props.record ? "../record-on.png" : "../record-off.png"}  />
-      </button>
       <button onClick={ToggleFullScreen} className="fullscreen-button">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" className="svg">
           <path className="on" d="M10 32h6v6h4V28H10v4zm6-16h-6v4h10V10h-4v6zm12 22h4v-6h6v-4H28v10zm4-22v-6h-4v10h10v-4h-6z" fill="white"></path>
@@ -70,10 +67,8 @@ Communication.propTypes = {
   message: React.PropTypes.string.isRequired,
   audio: React.PropTypes.bool.isRequired,
   video: React.PropTypes.bool.isRequired,
-  record: React.PropTypes.bool.isRequired,
   toggleVideo: React.PropTypes.func.isRequired,
   toggleAudio: React.PropTypes.func.isRequired,
-  toggleRecord: React.PropTypes.func.isRequired,
   getContent: React.PropTypes.func.isRequired,
   send: React.PropTypes.func.isRequired,
   handleHangup: React.PropTypes.func.isRequired,

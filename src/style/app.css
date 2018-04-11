@@ -39,8 +39,6 @@ input[type=text] {
 .audio-button-false,
 .video-button-true,
 .video-button-false,
-.record-button-true,
-.record-button-false,
 .fullscreen-button {
     width: 3em;
     height: 3em;
@@ -61,8 +59,6 @@ input[type=text] {
 .audio-button-false:hover,
 .video-button-true:hover,
 .video-button-false:hover,
-.record-button-true:hover,
-.record-button-false:hover,
 .fullscreen-button:hover {
     box-shadow: .4ex .4ex 3em #666;
     background: rgba(64, 124, 247, 1)
@@ -73,8 +69,6 @@ input[type=text] {
 .audio-button-true .on,
 .video-button-true .on,
 .video-button-false .off,
-.record-button-true .on,
-.record-button-false .off,
 .fullscreen-button .on,
 .room-occupied {
 	display: none;
@@ -221,8 +215,4 @@ input[type=text] {
 }
 .established + .auth .hangup-button {
     display: flex;
-}
-.imagesize
-{
-    width: 70%;
 }
