@@ -14,7 +14,8 @@ module.exports = {
         exclude: /node_modules/,
         loaders: ['babel-loader', 'eslint-loader']
       },
-      { test: /\.css$/, loader: "style-loader!css-loader" }
+      { test: /\.css$/, loader: "style-loader!css-loader" },
+      { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' }
     ]
   },
   plugins:[

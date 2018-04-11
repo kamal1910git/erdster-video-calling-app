@@ -15,15 +15,18 @@ class CommunicationContainer extends React.Component {
     getUserMedia: React.PropTypes.object.isRequired,
     audio: React.PropTypes.bool.isRequired,
     video: React.PropTypes.bool.isRequired,
+    record: React.PropTypes.bool.isRequired,
     setVideo: React.PropTypes.func.isRequired,
     setAudio: React.PropTypes.func.isRequired,
+    setRecord: React.PropTypes.func.isRequired,
     media: React.PropTypes.instanceOf(MediaContainer)
   }
   state = {
     sid: '',
     message: '',
     audio: true,
-    video: true
+    video: true,
+    record: true
   }
   hideAuth() {
     this.props.media.setState({bridge: 'connecting'});
@@ -33,6 +36,7 @@ class CommunicationContainer extends React.Component {
   componentWillMount() {
     this.setState({video: this.props.video});
     this.setState({audio: this.props.audio});
+    this.setState({record: this.props.record});
   }
   componentDidMount() {
     const socket = this.props.socket;
@@ -55,8 +59,7 @@ class CommunicationContainer extends React.Component {
           this.localStream.getAudioTracks()[0].enabled = this.state.audio;          
         });
   }
-  
-  
+    
   handleInput = e => this.setState({[e.target.dataset.ref]: e.target.value})
   send = e => {
     e.preventDefault();
@@ -81,6 +84,11 @@ class CommunicationContainer extends React.Component {
     this.setState({audio: audio});
     this.props.setAudio(audio);
   }
+  toggleRecord = () => {
+    const record =  !this.state.record;
+    this.setState({record: record});
+    this.props.setVideo(record);
+  }
   handleHangup = () => this.props.media.hangup()
   render(){
     return (
@@ -88,6 +96,7 @@ class CommunicationContainer extends React.Component {
         {...this.state}
         toggleVideo={this.toggleVideo}
         toggleAudio={this.toggleAudio}
+        toggleRecord={this.toggleRecord}
         getContent={this.getContent}
         send={this.send}
         handleHangup={this.handleHangup}
@@ -96,11 +105,12 @@ class CommunicationContainer extends React.Component {
     );
   }
 }
-const mapStateToProps = store => ({video: store.video, audio: store.audio});
+const mapStateToProps = store => ({video: store.video, audio: store.audio, record: store.record});
 const mapDispatchToProps = dispatch => (
     {
       setVideo: boo => store.dispatch({type: 'SET_VIDEO', video: boo}),
-      setAudio: boo => store.dispatch({type: 'SET_AUDIO', audio: boo})
+      setAudio: boo => store.dispatch({type: 'SET_AUDIO', audio: boo}),
+      setRecord: boo => store.dispatch({type: 'SET_RECORD', record: boo})
     }
   );
 export default connect(mapStateToProps, mapDispatchToProps)(CommunicationContainer);
