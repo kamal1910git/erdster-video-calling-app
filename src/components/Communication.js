@@ -36,9 +36,9 @@ const Communication = props =>
       </button>
     </div>
     <form className="request-access">
-      <p><span className="you-left">You hung up.&nbsp;</span>Say Hi to join the room.</p>
+      <p><span className="you-left">You hung up.&nbsp;</span>Send requesy to join the room.</p>
       <form onSubmit={props.send}>
-        <input type="text" autoFocus onChange={props.handleInput} data-ref="message"  maxLength="30" required placeholder="Hello !" />
+        <input type="text" autoFocus onChange={props.handleInput} data-ref="message"  maxLength="30" required />
         <button type="submit" className="primary-button">Send</button>
       </form>
     </form>
@@ -53,10 +53,9 @@ const Communication = props =>
       <Link  className="primary-button" to="/">OK</Link>
     </div>
     <div className="waiting">
-      <p><span>Please share this link to someone join this room:&nbsp;</span>
-      <CopyToClipboard text={window.location.href}
-          onCopy={() =>  alert('Copied..')}>
-          <a>Click here to copy the link</a>
+      <p>
+      <CopyToClipboard text={window.location.href}>
+          <a>Copy the room link and Invite</a>
         </CopyToClipboard>
       <br/>
       <span className="remote-left">The remote side hung up.</span></p>

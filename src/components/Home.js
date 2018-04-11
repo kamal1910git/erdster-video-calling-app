@@ -7,12 +7,12 @@ const Home = props =>
     <div>
       <Offline><p>Offline</p></Offline>
       <Online><p>Online</p></Online>
-      <h1 itemProp="headline">Erdster :: Video Calling :: Room Creation</h1>
+      <h1 itemProp="headline">Ready to create video chat room</h1>
       <p>Please enter a room name.</p>
       <form onSubmit={props.joinRoom}>
         <input type="text" name="room" value={props.roomId} onChange={props.handleChange} pattern="^\w+$" maxLength="10" required autoFocus title="Room name should only contain letters or numbers."/>
-        <Online><button className="primary-button" type="submit">Join</button></Online>        
-        <Offline><button disabled="true" className="primary-button" type="submit">Join</button></Offline>
+        <Online><button className="primary-button" type="submit">Create Room</button></Online>        
+        <Offline><button disabled="true" className="primary-button" type="submit">Create Room</button></Offline>
       </form>      
     </div>
   </div>;

@@ -24,7 +24,7 @@ function S3Router(options) {
     var filename = req.query.objectName;
     var mimeType = req.query.contentType;
     var ext = '.' + findType(mimeType);
-    var fileKey = filename + formatted + ext;
+    var fileKey = filename + "_" + formatted + ext;
 
     console.log('filename ' + filename);
     
