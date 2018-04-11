@@ -1,5 +1,6 @@
 var aws = require('aws-sdk');
 var express = require('express');
+var dateTime = require('node-datetime');
 
 function S3Router(options) {
   var S3_BUCKET = options.bucket;
@@ -16,11 +17,14 @@ function S3Router(options) {
   }
 
   router.get('/sign', function(req, res) {
-    
+  
+    var dt = dateTime.create();
+    var formatted = dt.format('YmdHMS');
+
     var filename = req.query.objectName;
     var mimeType = req.query.contentType;
     var ext = '.' + findType(mimeType);
-    var fileKey = filename + ext;
+    var fileKey = filename + formatted + ext;
 
     console.log('filename ' + filename);
     
