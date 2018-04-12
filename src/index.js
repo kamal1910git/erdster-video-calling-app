@@ -8,10 +8,13 @@ import Home from './containers/HomePage'
 import Room from './containers/RoomPage'
 import NotFound from './components/NotFound'
 import styles from './style/app.css'
+import styleLogin from './style/style.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 render(<Provider store={store}>
 		<Router history={browserHistory}>		
-		<Route path="/" component={Home} />
+		<Route path="/" component={Login} />
+		<Route path="/home" component={Home} />
 		<Route path="/r/:room" component={Room} />
 		<Route path="*" component={NotFound} />
 	</Router>

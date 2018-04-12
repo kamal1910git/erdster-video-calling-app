@@ -1,33 +1,4 @@
-body,
-input,
-button {
-    font-size: 1.6vw;
-    margin: 0;
-    font-family: Sans-Serif;
-}
-@media(max-width: 1024px) {
-    body,
-    input,
-    button {
-        font-size: 1em;
-    }
-}
-input:focus,
-button:focus {
-    outline:0;
-}
-input[type=text] {
-    border: none;
-    border-bottom: solid 2px #4c4c4f;
-    font-size: 1em;
-    background-color: transparent;
-    color: #fff;
-    padding: .4em 0;
-    margin: 2ex 0;
-    width: 100%;
-    max-width: 18em;
-    display: block;
-}
+
 .home {
     display: flex;
     justify-content: center;
@@ -215,4 +186,9 @@ input[type=text] {
 }
 .established + .auth .hangup-button {
     display: flex;
+}
+.errorInfo
+{
+    color:red;
+    font-size: 15px;
 }
