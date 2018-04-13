@@ -60,7 +60,7 @@ export default class LoginContent extends React.Component {
               <div className="col-md-10 col-md-push-1 col-sm-12 ">
                 <div id="myCarousel" className=" carousel slide" data-ride="carousel">  
                   <div className="carousel-inner panel panel-default ">
-                  <Carousel speed={200}>
+                  <Carousel>
                   <div className="item active">
                       <img src="assets/img/slide-img.jpg" alt="Los Angeles" />
                       <div className="carousel-caption">
@@ -117,5 +117,3 @@ export default class LoginContent extends React.Component {
       )
     }   
 }
-
-

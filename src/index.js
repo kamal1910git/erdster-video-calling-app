@@ -11,6 +11,7 @@ import styles from './style/app.css'
 import styleLogin from './style/style.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+
 render(<Provider store={store}>
 		<Router history={browserHistory}>		
 		<Route path="/" component={Login} />

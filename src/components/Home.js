@@ -5,8 +5,6 @@ import { Offline, Online } from 'react-detect-offline';
 const Home = props =>
   <div className="home">
     <div>
-      <Offline><p>Offline</p></Offline>
-      <Online><p>Online</p></Online>
       <h1 itemProp="headline">Ready to create video chat room</h1>
       <p>Please enter a room name.</p>
       <form onSubmit={props.joinRoom}>
