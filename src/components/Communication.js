@@ -36,7 +36,7 @@ const Communication = props =>
       </button>
     </div>
     <form className="request-access">
-      <p><span className="you-left">You hung up.&nbsp;</span>Send requesy to join the room.</p>
+      <p><span className="you-left">You hung up.&nbsp;</span>Send request to join the room.</p>
       <form onSubmit={props.send}>
         <input type="text" autoFocus onChange={props.handleInput} data-ref="message"  maxLength="30" required />
         <button type="submit" className="primary-button">Send</button>

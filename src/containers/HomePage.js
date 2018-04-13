@@ -37,7 +37,7 @@ class HomePage extends React.Component {
             <ul className="nav navbar-nav">
               <li><a href="#"><span className="avatar"><img src="assets/img/user.png" /></span>&nbsp;<strong>Nombre</strong></a></li>
               <li><a href="#" id="sidemenuBtn"><span><img src="assets/img/moreIcon.png" /></span></a></li>
-              <li style={{paddingTop: 8}}><a href="#"><i className="fa fa-circle" />&nbsp;<strong style={{fontSize: 16}}>Online</strong></a></li>
+              <li style={{paddingTop: 8}}><a href="#"><i className="fa fa-circle" />&nbsp;<strong style={{fontSize: 16}}><Online>Online</Online><Offline>Offline</Offline></strong></a></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
               <li className="dropdown">
@@ -76,6 +76,30 @@ class HomePage extends React.Component {
                   <div className="row">
                     <div className="col-md-6">
                       <video autoPlay="true" id="videoElement" />
+                      <div className="webCam-control">
+                      <div className="input-group">
+                        <span className="input-group-addon"><img src="assets/img/videoIcon.png" /></span>
+                        <select title="Select your surfboard" className="form-control">
+                          <option>Select...</option>
+                          <option data-thumbnail="images/icon-chrome.png">Chrome</option>
+                          <option data-thumbnail="images/icon-firefox.png">Firefox</option>
+                          <option data-thumbnail="images/icon-ie.png">IE</option>
+                          <option data-thumbnail="images/icon-opera.png">Opera</option>
+                          <option data-thumbnail="images/icon-safari.png">Safari</option>
+                        </select>
+                      </div>
+                      <div className="input-group">
+                        <span className="input-group-addon"><img src="assets/img/micIcon.png" /></span>
+                        <select title="Select your surfboard" className="form-control">
+                          <option>Select...</option>
+                          <option data-thumbnail="images/icon-chrome.png">Chrome</option>
+                          <option data-thumbnail="images/icon-firefox.png">Firefox</option>
+                          <option data-thumbnail="images/icon-ie.png">IE</option>
+                          <option data-thumbnail="images/icon-opera.png">Opera</option>
+                          <option data-thumbnail="images/icon-safari.png">Safari</option>
+                        </select>
+                      </div>
+                    </div>
                     </div>
                     <div className="col-md-6">
                       <div className="col-md-8 ">

@@ -60,7 +60,7 @@ export default class LoginContent extends React.Component {
               <div className="col-md-10 col-md-push-1 col-sm-12 ">
                 <div id="myCarousel" className=" carousel slide" data-ride="carousel">  
                   <div className="carousel-inner panel panel-default ">
-                  <Carousel>
+                 
                   <div className="item active">
                       <img src="assets/img/slide-img.jpg" alt="Los Angeles" />
                       <div className="carousel-caption">
@@ -82,7 +82,7 @@ export default class LoginContent extends React.Component {
                         <p>Gain more insight on candidates in far less time than a traditional phone interview. Candidates will answer your questions on their own time and you can review the completed video interviews at your convenience. As a result, you'll hear from more candidates, easily compare them, and never have to worry about scheduling early-round interviews again.</p>
                       </div>
                     </div>
-                  </Carousel>                    
+                                    
                   </div>
                   </div>
               </div>
