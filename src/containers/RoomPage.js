@@ -70,21 +70,17 @@ class RoomPage extends React.Component {
                   <div className="panel-container card-wizard">
                   <div>
                     <MediaContainer media={media => this.media = media} socket={this.socket} getUserMedia={this.getUserMedia} />
-                    
+                    <CommunicationContainer socket={this.socket} media={this.media} getUserMedia={this.getUserMedia} />
                   </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="row">                        
-          <CommunicationContainer socket={this.socket} media={this.media} getUserMedia={this.getUserMedia} />
+          <div className="row">                                  
           </div>
         </div>
-      </div>
-      <footer>
-        <img src="/assets/img/prc-logo.png" className="img-responsive pull-right" style={{margin: '0 auto', width: 100}} />
-      </footer>
+      </div>      
     </div>
     );
   }
