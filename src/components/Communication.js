@@ -5,12 +5,7 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const Communication = props =>
   <div className="auth">
-    <div className="media-controls">
-      <Link className="call-exit-button" to="/">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"  className="svg">
-          <path d="M30 16.5h-18.26l8.38-8.38-2.12-2.12-12 12 12 12 2.12-2.12-8.38-8.38h18.26v-3z" fill="white"/>
-        </svg>
-      </Link>
+    <div className="media-controls">     
       <button onClick={props.toggleAudio} className={'audio-button-' + props.audio}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" className="svg">
           <path className="on" d="M38 22h-3.4c0 1.49-.31 2.87-.87 4.1l2.46 2.46C37.33 26.61 38 24.38 38 22zm-8.03.33c0-.11.03-.22.03-.33V10c0-3.32-2.69-6-6-6s-6 2.68-6 6v.37l11.97 11.96zM8.55 6L6 8.55l12.02 12.02v1.44c0 3.31 2.67 6 5.98 6 .45 0 .88-.06 1.3-.15l3.32 3.32c-1.43.66-3 1.03-4.62 1.03-5.52 0-10.6-4.2-10.6-10.2H10c0 6.83 5.44 12.47 12 13.44V42h4v-6.56c1.81-.27 3.53-.9 5.08-1.81L39.45 42 42 39.46 8.55 6z" fill="white"></path>
@@ -36,24 +31,24 @@ const Communication = props =>
       </button>
     </div>
     <form className="request-access">
-      <p><span className="you-left">You hung up.&nbsp;</span>Send request to join the room.</p>
+      <p className="paragraph"><span className="you-left">You hung up.&nbsp;</span>Send request to join the room.</p>
       <form onSubmit={props.send}>
-        <input type="text" autoFocus onChange={props.handleInput} data-ref="message"  maxLength="30" required />
-        <button type="submit" className="primary-button">Send</button>
+        <input type="text" autoFocus onChange={props.handleInput} data-ref="message"  maxLength="30" required />        
+        &nbsp;&nbsp;<button type="submit" className="btn btn-primary login-button">Send</button>
       </form>
     </form>
     <div className="grant-access">
-      <p>A peer has sent you a message to join the room:</p>
+      <p className="paragraph">A peer has sent you a message to join the room:</p>
       <div dangerouslySetInnerHTML={props.getContent(props.message)}></div>
-      <button onClick={props.handleInvitation} data-ref="reject" className="primary-button">Reject</button>
-      <button onClick={props.handleInvitation} data-ref="accept" className="primary-button">Accept</button>
+      <button onClick={props.handleInvitation} data-ref="reject" className="btn btn-primary login-button btn-grey">Reject</button>&nbsp;&nbsp;
+      <button onClick={props.handleInvitation} data-ref="accept" className="btn btn-primary login-button">Accept</button>
     </div>
     <div className="room-occupied">
-      <p>Please, try another room!</p>
+      <p className="paragraph">Please, try another room!</p>
       <Link  className="primary-button" to="/">OK</Link>
     </div>
     <div className="waiting">
-      <p>
+      <p className="paragraph">
       <CopyToClipboard text={window.location.href}>
           <a>Copy the room link and Invite</a>
       </CopyToClipboard>

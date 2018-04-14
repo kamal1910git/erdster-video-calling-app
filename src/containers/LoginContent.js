@@ -81,9 +81,13 @@ export default class LoginContent extends React.Component {
                         <h4>One to One video interview platform</h4>
                         <p>Gain more insight on candidates in far less time than a traditional phone interview. Candidates will answer your questions on their own time and you can review the completed video interviews at your convenience. As a result, you'll hear from more candidates, easily compare them, and never have to worry about scheduling early-round interviews again.</p>
                       </div>
-                    </div>
-                                    
+                    </div>                                    
                   </div>
+                  <ol className="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to={0} className="active" />
+                    <li data-target="#myCarousel" data-slide-to={1} />
+                    <li data-target="#myCarousel" data-slide-to={2} />
+                  </ol>
                   </div>
               </div>
             </div> 
