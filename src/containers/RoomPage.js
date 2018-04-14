@@ -64,20 +64,10 @@ class RoomPage extends React.Component {
         </div>
         <div className="content-area in">  
           <div className="row">
-            <div className="card-wizard" style={{overflow: 'hidden'}}>            
-              <div className="panel panel-default " style={{background: 'transparent'}}>
-                <div className="panel-body" style={{padding: 0}}>
-                  <div className="panel-container card-wizard">
-                  <div>
-                    <MediaContainer media={media => this.media = media} socket={this.socket} getUserMedia={this.getUserMedia} />
-                    <CommunicationContainer socket={this.socket} media={this.media} getUserMedia={this.getUserMedia} />
-                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="row">                                  
+            <div>
+                <MediaContainer media={media => this.media = media} socket={this.socket} getUserMedia={this.getUserMedia} />
+                <CommunicationContainer socket={this.socket} media={this.media} getUserMedia={this.getUserMedia} />
+             </div>
           </div>
         </div>
       </div>      

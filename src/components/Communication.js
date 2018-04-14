@@ -56,7 +56,7 @@ const Communication = props =>
       <p>
       <CopyToClipboard text={window.location.href}>
           <a>Copy the room link and Invite</a>
-        </CopyToClipboard>
+      </CopyToClipboard>
       <br/>
       <span className="remote-left">The remote side hung up.</span></p>
     </div>
