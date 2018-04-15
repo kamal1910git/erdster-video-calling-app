@@ -49,9 +49,10 @@ const Communication = props =>
     </div>
     <div className="waiting">
       <p className="paragraph">
-      <CopyToClipboard text={window.location.href}>
-          <a>Copy the room link and Invite</a>
-      </CopyToClipboard>
+      <CopyToClipboard text={window.location.href}
+          onCopy={() =>  alert('Copied the Link.. Can be shared now..')}>
+          <a>Click here to copy the link</a>
+        </CopyToClipboard>
       <br/>
       <span className="remote-left">The remote side hung up.</span></p>
     </div>
