@@ -75,7 +75,7 @@ class HomePage extends React.Component {
                   </ul>
                   <div className="row">
                     <div className="col-md-6">                    
-                      <img src="/assets/img/slide-img.jpg" id="videoElement" />
+                      <img src="/assets/img/welcome-img.jpg" id="videoElement" />
                       <div className="webCam-control">                      
                     </div>
                     </div>
