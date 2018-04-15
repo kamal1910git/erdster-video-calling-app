@@ -74,31 +74,9 @@ class HomePage extends React.Component {
                     <li><a href="javascript:void(0);" id="panelFullScreen" role="button" title="Toggle fullscreen"><i className="fa fa fa-expand" /></a></li>
                   </ul>
                   <div className="row">
-                    <div className="col-md-6">
-                      <video autoPlay="true" id="videoElement" />
-                      <div className="webCam-control">
-                      <div className="input-group">
-                        <span className="input-group-addon"><img src="assets/img/videoIcon.png" /></span>
-                        <select title="Select your surfboard" className="form-control">
-                          <option>Select...</option>
-                          <option data-thumbnail="images/icon-chrome.png">Chrome</option>
-                          <option data-thumbnail="images/icon-firefox.png">Firefox</option>
-                          <option data-thumbnail="images/icon-ie.png">IE</option>
-                          <option data-thumbnail="images/icon-opera.png">Opera</option>
-                          <option data-thumbnail="images/icon-safari.png">Safari</option>
-                        </select>
-                      </div>
-                      <div className="input-group">
-                        <span className="input-group-addon"><img src="assets/img/micIcon.png" /></span>
-                        <select title="Select your surfboard" className="form-control">
-                          <option>Select...</option>
-                          <option data-thumbnail="images/icon-chrome.png">Chrome</option>
-                          <option data-thumbnail="images/icon-firefox.png">Firefox</option>
-                          <option data-thumbnail="images/icon-ie.png">IE</option>
-                          <option data-thumbnail="images/icon-opera.png">Opera</option>
-                          <option data-thumbnail="images/icon-safari.png">Safari</option>
-                        </select>
-                      </div>
+                    <div className="col-md-6">                    
+                      <img src="/assets/img/slide-img.jpg" id="videoElement" />
+                      <div className="webCam-control">                      
                     </div>
                     </div>
                     <div className="col-md-6">
