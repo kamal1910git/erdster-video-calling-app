@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import ToggleFullScreen from './ToggleFullScreen'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import PopupWindow from "./PopupWindow";
 
 const Communication = props =>
   <div className="auth">
@@ -49,8 +50,8 @@ const Communication = props =>
     </div>
     <div className="waiting">
       <p className="paragraph">
-      <CopyToClipboard text={window.location.href}
-          onCopy={() =>  alert('Copied the Link.. Can be shared now..')}>
+        <CopyToClipboard text={window.location.href}
+          onCopy={() =>  alert('Copied the Link..')}>
           <a>Click here to copy the link</a>
         </CopyToClipboard>
       <br/>
