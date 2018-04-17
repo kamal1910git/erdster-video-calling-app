@@ -108,7 +108,7 @@ td small {
 }
 
 label {
-    color: #666666;
+    color: #fff;
 }
 
 a.customLink::before {
@@ -144,7 +144,7 @@ footer {
     color: #7c64a8;
 }
 
-body.loginpage {
+div.loginpage {
     overflow: hidden;
 }
 
@@ -156,13 +156,11 @@ body.loginpage {
 }
 
 .loginpage {
-    height: 100%;
-    /*
-  background-image: url(../img/login-bg.jpg);
+  height: 100% !important;    
+  background-image: url(../img/login--image.jpg);
   background-position: center center;
   background-size: cover; 
-*/
-    padding-top: 25px;
+  padding-top: 25px;
 }
 
 .loginpage .carousel {
@@ -175,7 +173,7 @@ body.loginpage {
 }
 
 .loginpage .carousel-caption {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.9);
     width: 100%;
     margin: 0 auto;
     color: #929292;
@@ -789,7 +787,7 @@ ededed .card.row-space .header {
     width: auto;
     height: 275px;
     background-color: #666;
-    margin: 2% 1% 2% 2%;
+    margin: 5% 7%;
 }
 div.sidebar.in{width:0; } 
 
@@ -863,6 +861,19 @@ div.connt-div{position: absolute; background: #8973b1; border-radius: 3px; width
 .connt-div .ullist li{display: inline-block;}
 .connt-div .btn-primary{border-radius: 4px; font-size: 14px; padding: 6px 12px;}
 .card-wizard {min-height: calc(100% - 75px); overflow: auto;}
+ .panel-bg {
+    background: url(../img/bg-create.png) no-repeat center center;
+    background-size: 100% 100%;
+}
+
+.color-white {
+    color: #fff;
+}
+
+.margin-top-50 {
+    margin-top: 50px;
+}
+.footer-img{margin: 0 auto; width: 100px;}
 @media (min-width: 768px) {
     .navbar-nav > li > a {
         padding-top: 10px;
@@ -870,9 +881,38 @@ div.connt-div{position: absolute; background: #8973b1; border-radius: 3px; width
         margin: 5px;
     }
 }
-
-@media screen (max-width:767px) {
-    body.loginpage {
+@media (max-width:991px){
+    div.content-area {     right: 6px;}
+    .navbar-right {
+    float: right!important;
+    margin-right:5px;
+}
+    .footer-img{margin: 0 auto; width: 75px;}
+    html, body{overflow: hidden;}
+    div.loginpage{overflow-y: scroll;}
+}
+@media (max-width:767px) {
+    div.loginpage {
         overflow: scroll;
     }
+    #navbar .navbar-nav{ float: left;}
+    #navbar .navbar-nav li {float: left;}
+    .nav>li>a{padding: 10px 5px;}
+    #navbar .navbar-right{float: right !important;}
+    #navbar .navbar-nav li span.proName{display: none;}
+    body{overflow: hidden;}
+    div.loginpage{overflow-y: scroll;}
+    .loginpage .carousel-caption p{display: none;}
+    
+}
+@media (max-width:730px) {
+    div.content-area {  right: 4px;  }
+    html, body{overflow: hidden;}
+    #navbar .navbar-right li.dropdown{display: none;} 
+}
+
+
+.panel-bg {
+    background: url(../img/bg-create.png) no-repeat center center;
+    background-size: 100% 100%;
 }
