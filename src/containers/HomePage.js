@@ -24,6 +24,8 @@ class HomePage extends React.Component {
 
   componentDidMount() {
 
+    document.body.className="bodyOverrideBack";
+
     $("a#sidemenuBtn").click(function() {
         $('div.sidebar').toggle('slow');
         $('div.sidebar').toggleClass('in');

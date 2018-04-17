@@ -46,8 +46,8 @@ export default class LoginContent extends React.Component {
     }
   }
 
-  componentDidMount() {
-
+  componentDidMount(){
+    document.body.className="bodyOverride";
   }
 
   render() {

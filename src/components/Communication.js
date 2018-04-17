@@ -32,17 +32,17 @@ const Communication = props =>
       </button>
     </div>
     <form className="request-access">
-      <p className="paragraph"><span className="you-left">You hung up.&nbsp;</span>Send request to join the room.</p>
+      <p className="paragraph"><span className="you-left">You hung up.&nbsp;</span>Send request to interviewer to join the room.</p>
       <form onSubmit={props.send}>
         <input type="text" autoFocus onChange={props.handleInput} data-ref="message"  maxLength="30" required />        
-        &nbsp;&nbsp;<button type="submit" className="btn btn-primary login-button">Send</button>
+        &nbsp;&nbsp;<button type="submit" className="btn btn-primary-small login-button">Send</button>
       </form>
     </form>
     <div className="grant-access">
-      <p className="paragraph">A peer has sent you a message to join the room:</p>
+      <p className="paragraph">A interviewee has sent you a message to join the room:</p>
       <div dangerouslySetInnerHTML={props.getContent(props.message)}></div>
-      <button onClick={props.handleInvitation} data-ref="reject" className="btn btn-primary login-button btn-grey">Reject</button>&nbsp;&nbsp;
-      <button onClick={props.handleInvitation} data-ref="accept" className="btn btn-primary login-button">Accept</button>
+      <button onClick={props.handleInvitation} data-ref="reject" className="btn btn-primary-small login-button btn-grey">Reject</button>&nbsp;&nbsp;
+      <button onClick={props.handleInvitation} data-ref="accept" className="btn btn-primary-small login-button">Accept</button>
     </div>
     <div className="room-occupied">
       <p className="paragraph">Please, try another room!</p>
