@@ -22,6 +22,30 @@ class HomePage extends React.Component {
   }
   handleChange = e => this.setState({value: e.target.value})
 
+  handleLogoutClick = e => {
+    e.preventDefault();
+    localStorage.clear('PRCUser_Token');
+    this.context.router.push('/');
+  }
+
+  handleLeftNavClick = e => {
+    e.preventDefault();
+    const user = JSON.parse(localStorage.getItem('PRCUser_Token'));
+    if (!user) {
+      this.context.router.push('/');
+    }
+    else{
+      this.context.router.push('/RoomList');
+    } 
+  }
+
+  componentWillMount() {
+    const user = JSON.parse(localStorage.getItem('PRCUser_Token'));
+    if (!user) {
+      this.context.router.push('/');
+    } 
+  }
+  
   componentDidMount() {
 
     document.body.className="bodyOverrideBack";
@@ -78,24 +102,12 @@ class HomePage extends React.Component {
           <div className="container-fluid">
             <div id="navbar" className="navbar-collapse ">
               <ul className="nav navbar-nav">
-                <li><a href="#"><span className="avatar"><img src="assets/img/user.png" /></span>&nbsp;<span className="proName"><strong>Nombre</strong></span></a></li>
-                <li><a href="#" id="sidemenuBtn"><span><img src="assets/img/scv-img/menu.svg" width={28} /></span></a></li>
-                <li style={{paddingTop: 8}}><a href="#"><i className="fa fa-circle" />&nbsp;<strong style={{fontSize: 16}}><Online>Online</Online><Offline>Offline</Offline></strong></a></li>
+                <li className='cursor-indication'><a><span className="avatar"><img src="assets/img/user.png" /></span>&nbsp;<span className="proName"><strong>Nombre</strong></span></a></li>
+                <li className='cursor-indication'><a  id="sidemenuBtn"><span><img src="assets/img/scv-img/menu.svg" width={28} /></span></a></li>
+                <li className='cursor-indication' style={{paddingTop: 8}}><a ><i className="fa fa-circle" />&nbsp;<strong style={{fontSize: 16}}><Online>Online</Online><Offline>Offline</Offline></strong></a></li>
               </ul>
-              <ul className="nav navbar-nav navbar-right">
-                <li className="dropdown">
-                  <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="assets/img/scv-img/settings.svg" width={28} />{/* <span class="caret"></span>*/}</a>
-                  <ul className="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li role="separator" className="divider" />
-                    <li className="dropdown-header">Nav header</li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
-                </li>
-                <li><a href="#"><img src="assets/img/scv-img/logout.svg" width={28} /></a></li>
+              <ul className="nav navbar-nav navbar-right">                
+                <li className='cursor-indication'><a onClick={this.handleLogoutClick.bind(this)}><img src="assets/img/scv-img/logout.svg" width={28} /></a></li>
               </ul>
             </div>
           </div>
@@ -103,8 +115,8 @@ class HomePage extends React.Component {
         <div className="container-fluid main-panel">
           <div className="sidebar pull-left">
             <ul className="ullist">
-              <li><a className="active"><img src="assets/img/create-room-a.png" /><span>Create Room</span></a></li>
-              <li><a><img src="assets/img/meeting.png" /><span>Room List</span></a></li>
+              <li className='cursor-indication'><a  className="active"><img src="assets/img/create-room-a.png" /><span>Create Room</span></a></li>
+              <li className='cursor-indication'><a onClick={this.handleLeftNavClick.bind(this)}><img src="assets/img/meeting.png" /><span>Room List</span></a></li>
             </ul>
           </div>
           <div className="content-area">

@@ -1,5 +1,6 @@
 import { createStore } from 'redux';
 import reducers from './reducers';
+
 const mapStoreToStorage = () =>
 	localStorage.setItem('reduxState', JSON.stringify(store.getState())),
 	persistedState = localStorage.getItem('reduxState') ?

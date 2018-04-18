@@ -35,6 +35,10 @@ export default class LoginContent extends React.Component {
     e.preventDefault();
     if(this.state.username === 'admin' && this.state.password === 'admin')
     {
+      var ranValue = 1000000;
+      const rand =  Math.random() * ranValue;
+      var tempToken = rand + '_' + this.state.username;
+      localStorage.setItem('PRCUser_Token', JSON.stringify(tempToken));
       this.context.router.push('/home');
     }
     else
@@ -44,6 +48,10 @@ export default class LoginContent extends React.Component {
       })
       
     }
+  }
+
+  componentWillMount() {
+    localStorage.clear('PRCUser_Token');
   }
 
   componentDidMount(){
