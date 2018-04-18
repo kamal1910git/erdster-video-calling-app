@@ -70,7 +70,7 @@ export default class MediaBridge extends React.Component {
       };
       this.dc.onclose = () => {
         this.remoteStream.getVideoTracks()[0].stop();
-        this.stopRecord();
+        // this.stopRecord(); TODO:: We need to enable..
         console.log('The Data Channel is Closed');
       };
   }
@@ -192,7 +192,7 @@ export default class MediaBridge extends React.Component {
         this.setState({dataStream: e.stream});
         this.remoteVideo.src = window.URL.createObjectURL(this.remoteStream);
         this.setState({bridge: 'established'});
-        this.startRecord();
+        //this.startRecord(); // TODO:: We need to enable..
     };
     this.pc.ondatachannel = e => {
         // data channel
