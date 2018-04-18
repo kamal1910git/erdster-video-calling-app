@@ -5,10 +5,12 @@ import MediaContainer from './MediaContainer'
 import Communication from '../components/Communication'
 import store from '../store'
 import { connect } from 'react-redux'
+import PopupWindow from "../components/PopupWindow";
 
 class CommunicationContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { isOpen: false };
   }
   static propTypes = {
     socket: React.PropTypes.object.isRequired,
@@ -23,17 +25,39 @@ class CommunicationContainer extends React.Component {
     sid: '',
     message: '',
     audio: true,
-    video: true
+    video: true,
+    isOpen: false
   }
+
   hideAuth() {
     this.props.media.setState({bridge: 'connecting'});
   } 
   full = () => this.props.media.setState({bridge: 'full'})
 
+  toggleModal = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+    
+    this.props.setAudio(this.state.isOpen); 
+      
+  }
+
+  _renderSubComp(){
+    if(this.state.isOpen){
+      return <PopupWindow show={this.state.isOpen}
+        onClose={this.toggleModal}>
+       Here's some content for the modal
+      </PopupWindow>   
+    }
+  }
+
+
   componentWillMount() {
     this.setState({video: this.props.video});
     this.setState({audio: this.props.audio});
   }
+
   componentDidMount() {
     const socket = this.props.socket;
     socket.on('create', () =>
@@ -68,6 +92,7 @@ class CommunicationContainer extends React.Component {
     this.props.socket.emit([e.target.dataset.ref], this.state.sid);
     this.hideAuth();
   }
+
   getContent(content) {
     return {__html: (new Remarkable()).render(content)};
   }
@@ -83,8 +108,9 @@ class CommunicationContainer extends React.Component {
   }
   handleHangup = () => this.props.media.hangup()
   render(){
-    return (
+    return (      
       <Communication
+        {...this._renderSubComp()}
         {...this.state}
         toggleVideo={this.toggleVideo}
         toggleAudio={this.toggleAudio}
@@ -92,7 +118,9 @@ class CommunicationContainer extends React.Component {
         send={this.send}
         handleHangup={this.handleHangup}
         handleInput={this.handleInput}
-        handleInvitation={this.handleInvitation} />
+        handleInvitation={this.handleInvitation}
+        handleCopyLinkClick={this.toggleModal} />    
+        
     );
   }
 }

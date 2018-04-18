@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router'
 import ToggleFullScreen from './ToggleFullScreen'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
-import PopupWindow from "./PopupWindow";
 
 const Communication = props =>
   <div className="auth">
@@ -50,13 +49,13 @@ const Communication = props =>
     </div>
     <div className="waiting">
       <p className="paragraph">
-        <CopyToClipboard text={window.location.href}
+      <CopyToClipboard text={window.location.href}
           onCopy={() =>  alert('Copied the Link..')}>
-          <a>Click here to copy the link</a>
-        </CopyToClipboard>
+          <a onClick={props.handleCopyLinkClick}>Click here to copy the link</a>
+        </CopyToClipboard> 
       <br/>
       <span className="remote-left">The remote side hung up.</span></p>
-    </div>
+    </div>    
   </div>
 
 Communication.propTypes = {
@@ -69,7 +68,8 @@ Communication.propTypes = {
   send: React.PropTypes.func.isRequired,
   handleHangup: React.PropTypes.func.isRequired,
   handleInput: React.PropTypes.func.isRequired,
-  handleInvitation: React.PropTypes.func.isRequired
+  handleInvitation: React.PropTypes.func.isRequired,
+  handleCopyLinkClick: React.PropTypes.func.isRequired
 };
 
 export default Communication;
