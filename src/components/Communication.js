@@ -51,21 +51,23 @@ const Communication = props =>
     </div>
     <div className="waiting">
       <p className="paragraph">
-      <a onClick={props.handleCopyLinkClick}>Click here to copy the link</a>
+      <a onClick={props.handleCopyLinkClick}>Click here to share the room link</a>
           { props.isOpen &&
            <div className="container">
-                    <Dialog
-                        title="Dialog Title"
+                    <Dialog itle="Dialog Title"
                         modal={true}
                         onClose={props.handleCopyLinkClick}
                         buttons={
                             [{
-                                text: "Close",
+                                text: "Send",
                                 onClick: () => props.handleCopyLinkClick()
-                            }]
+                            },{
+                              text: "Close",
+                              onClick: () => props.handleCopyLinkClick()
+                          }]
                         }>
-                        <h1>Dialog Content</h1>
-                        <p>More Content. Anything goes here</p>
+                        <h1>Enter the interviewee email:</h1>
+                        <p><input type="email" autoFocus data-ref="message"  maxLength="30" required /></p>
                     </Dialog>
             </div>
             }
