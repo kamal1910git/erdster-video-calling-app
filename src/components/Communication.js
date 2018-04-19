@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router'
 import ToggleFullScreen from './ToggleFullScreen'
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+import {CopyToClipboard} from 'react-copy-to-clipboard'
+import Dialog from 'react-dialog'
+import '../../node_modules/react-dialog/css/index.css';
 
 const Communication = props =>
   <div className="auth">
@@ -49,10 +51,24 @@ const Communication = props =>
     </div>
     <div className="waiting">
       <p className="paragraph">
-      <CopyToClipboard text={window.location.href}
-          onCopy={() =>  alert('Copied the Link..')}>
-          <a onClick={props.handleCopyLinkClick}>Click here to copy the link</a>
-        </CopyToClipboard> 
+      <a onClick={props.handleCopyLinkClick}>Click here to copy the link</a>
+          { props.isOpen &&
+           <div className="container">
+                    <Dialog
+                        title="Dialog Title"
+                        modal={true}
+                        onClose={props.handleCopyLinkClick}
+                        buttons={
+                            [{
+                                text: "Close",
+                                onClick: () => props.handleCopyLinkClick()
+                            }]
+                        }>
+                        <h1>Dialog Content</h1>
+                        <p>More Content. Anything goes here</p>
+                    </Dialog>
+            </div>
+            }
       <br/>
       <span className="remote-left">The remote side hung up.</span></p>
     </div>    

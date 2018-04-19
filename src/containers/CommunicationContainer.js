@@ -43,16 +43,6 @@ class CommunicationContainer extends React.Component {
       
   }
 
-  _renderSubComp(){
-    if(this.state.isOpen){
-      return <PopupWindow show={this.state.isOpen}
-        onClose={this.toggleModal}>
-       Here's some content for the modal
-      </PopupWindow>   
-    }
-  }
-
-
   componentWillMount() {
     this.setState({video: this.props.video});
     this.setState({audio: this.props.audio});
@@ -79,8 +69,7 @@ class CommunicationContainer extends React.Component {
           this.localStream.getAudioTracks()[0].enabled = this.state.audio;          
         });
   }
-  
-  
+    
   handleInput = e => this.setState({[e.target.dataset.ref]: e.target.value})
   send = e => {
     e.preventDefault();
@@ -110,7 +99,6 @@ class CommunicationContainer extends React.Component {
   render(){
     return (      
       <Communication
-        {...this._renderSubComp()}
         {...this.state}
         toggleVideo={this.toggleVideo}
         toggleAudio={this.toggleAudio}
