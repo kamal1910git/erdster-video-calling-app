@@ -58,16 +58,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post('/sendemail', function (req, res) {  
     
-  var SENDGRID_API_KEY = "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";
-  var SENDGRID_SENDER = "kamal_cse@hotmail.com";
-
   var to = req.body.toemail; 
-  var from = SENDGRID_SENDER;
+  var from = process.env.SENDGRID_SENDER;
   var subject = req.body.subject;
   var html = req.body.mailbody;
   console.log("html " + html);
-  //sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  sgMail.setApiKey(SENDGRID_API_KEY);
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  //sgMail.setApiKey(SENDGRID_API_KEY);
   const msg = {
     to: to,
     from: from,
