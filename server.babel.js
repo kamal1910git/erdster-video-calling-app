@@ -64,7 +64,6 @@ app.post('/sendemail', function (req, res) {
   var html = req.body.mailbody;
   console.log("html " + html);
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  //sgMail.setApiKey(SENDGRID_API_KEY);
   const msg = {
     to: to,
     from: from,

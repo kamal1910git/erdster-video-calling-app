@@ -99,15 +99,13 @@ class CommunicationContainer extends React.Component {
   }
   handleSendEmailClick = () => {
     console.log("Send email call started");
-    console.log("room link: " + window.location.href);
-
     var msg = '<p>Please click the below link to join the room..</p><br /><a href="'+ window.location.href +'">'+ window.location.href +'</a>';
     var data = {
         toemail: this.state.toEmail,
         subject: "Video chat room link",
         mailbody: msg
       };
-
+      var that = this;
       const promise = $.ajax({
         url: "/sendemail",
         type: "POST",
@@ -116,19 +114,21 @@ class CommunicationContainer extends React.Component {
       });
 
       promise.done(function(data){
-        this.setState({
-          toEmail: '',
-          isOpen: !this.state.isOpen
+        console.log("Email sent..");
+        alert("Email sent to recipient..");
+        that.setState({
+          isOpen: !that.state.isOpen,
+          toEmail: ''
         });
       });
 
-      promise.fail(function(jqXhr){
-        console.log(jqXhr);
-        alert("Failed to send email, please try again...")
-        this.setState({
-          toEmail: '',
-          isOpen: !this.state.isOpen
-        });
+      promise.fail(function(jqXhr){       
+        console.log(jqXhr);  
+        alert("Server error, please try again...");
+        that.setState({
+          isOpen: !that.state.isOpen,
+          toEmail: ''
+        });        
       });
   }
 
