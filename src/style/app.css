@@ -203,36 +203,17 @@
     border: darkgrey !important;
 }
 
-.modal {
-    font-size: 12px;
-  }
-  .modal > .header {
+.ui-dialog .ui-dialog-buttonpane button
+{
+    background-color: #f4146f !important;
+    color: #fff !important;
+    font-weight: bold !important;
+}
+
+.emailText{
     width: 100%;
-    border-bottom: 1px solid gray;
-    font-size: 18px;
-    text-align: center;
-    padding: 5px;
-  }
-  .modal > .content {
-    width: 100%;
-    padding: 10px 5px;
-  }
-  .modal > .actions {
-    width: 100%;
-    padding: 10px 5px;
-    margin: auto;
-    text-align: center;
-  }
-  .modal > .close {
-    cursor: pointer;
-    position: absolute;
-    display: block;
-    padding: 2px 5px;
-    line-height: 20px;
-    right: -10px;
-    top: -10px;
-    font-size: 24px;
-    background: #ffffff;
-    border-radius: 18px;
-    border: 1px solid #cfcece;
-  }
+    height: 2.5em;
+    border-width: 0.2em;
+    border-color: #ccc;
+    font-size: 1.2em;
+}

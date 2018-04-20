@@ -7,7 +7,12 @@ import '../../node_modules/react-dialog/css/index.css';
 
 const Communication = props =>
   <div className="auth">
-    <div className="media-controls">     
+    <div className="media-controls">
+    <Link className="call-exit-button" to="/">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"  className="svg">
+          <path d="M30 16.5h-18.26l8.38-8.38-2.12-2.12-12 12 12 12 2.12-2.12-8.38-8.38h18.26v-3z" fill="white"/>
+        </svg>
+      </Link>
       <button onClick={props.toggleAudio} className={'audio-button-' + props.audio}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" className="svg">
           <path className="on" d="M38 22h-3.4c0 1.49-.31 2.87-.87 4.1l2.46 2.46C37.33 26.61 38 24.38 38 22zm-8.03.33c0-.11.03-.22.03-.33V10c0-3.32-2.69-6-6-6s-6 2.68-6 6v.37l11.97 11.96zM8.55 6L6 8.55l12.02 12.02v1.44c0 3.31 2.67 6 5.98 6 .45 0 .88-.06 1.3-.15l3.32 3.32c-1.43.66-3 1.03-4.62 1.03-5.52 0-10.6-4.2-10.6-10.2H10c0 6.83 5.44 12.47 12 13.44V42h4v-6.56c1.81-.27 3.53-.9 5.08-1.81L39.45 42 42 39.46 8.55 6z" fill="white"></path>
@@ -54,20 +59,20 @@ const Communication = props =>
       <a onClick={props.handleCopyLinkClick}>Click here to share the room link</a>
           { props.isOpen &&
            <div className="container">
-                    <Dialog itle="Dialog Title"
+                    <Dialog title="Share the link"
                         modal={true}
                         onClose={props.handleCopyLinkClick}
                         buttons={
                             [{
-                                text: "Send",
-                                onClick: () => props.handleCopyLinkClick()
+                                text: "Send Email",
+                                onClick: () => props.handleSendEmailClick()
                             },{
                               text: "Close",
                               onClick: () => props.handleCopyLinkClick()
                           }]
                         }>
-                        <h1>Enter the interviewee email:</h1>
-                        <p><input type="email" autoFocus data-ref="message"  maxLength="30" required /></p>
+                        <h4>Enter the interviewee email:</h4>
+                        <p><input className="emailText" onChange={props.handleInput} type="Email" autoFocus data-ref="toEmail" maxLength="150" required /></p>
                     </Dialog>
             </div>
             }
@@ -87,7 +92,9 @@ Communication.propTypes = {
   handleHangup: React.PropTypes.func.isRequired,
   handleInput: React.PropTypes.func.isRequired,
   handleInvitation: React.PropTypes.func.isRequired,
-  handleCopyLinkClick: React.PropTypes.func.isRequired
+  handleCopyLinkClick: React.PropTypes.func.isRequired,
+  handleSendEmailClick: React.PropTypes.func.isRequired,
+  toEmail: React.PropTypes.string.isRequired
 };
 
 export default Communication;

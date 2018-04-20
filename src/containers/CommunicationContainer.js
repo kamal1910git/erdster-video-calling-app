@@ -5,7 +5,7 @@ import MediaContainer from './MediaContainer'
 import Communication from '../components/Communication'
 import store from '../store'
 import { connect } from 'react-redux'
-import PopupWindow from "../components/PopupWindow";
+import $ from 'jquery'
 
 class CommunicationContainer extends React.Component {
   constructor(props) {
@@ -26,7 +26,8 @@ class CommunicationContainer extends React.Component {
     message: '',
     audio: true,
     video: true,
-    isOpen: false
+    isOpen: false,
+    toEmail: ''
   }
 
   hideAuth() {
@@ -39,8 +40,7 @@ class CommunicationContainer extends React.Component {
       isOpen: !this.state.isOpen
     });
     
-    this.props.setAudio(this.state.isOpen); 
-      
+    this.props.setAudio(this.state.isOpen);       
   }
 
   componentWillMount() {
@@ -71,11 +71,13 @@ class CommunicationContainer extends React.Component {
   }
     
   handleInput = e => this.setState({[e.target.dataset.ref]: e.target.value})
+
   send = e => {
     e.preventDefault();
     this.props.socket.emit('auth', this.state);
     this.hideAuth();
   }
+
   handleInvitation = e => {
     e.preventDefault();
     this.props.socket.emit([e.target.dataset.ref], this.state.sid);
@@ -95,6 +97,41 @@ class CommunicationContainer extends React.Component {
     this.setState({audio: audio});
     this.props.setAudio(audio);
   }
+  handleSendEmailClick = () => {
+    console.log("Send email call started");
+    console.log("room link: " + window.location.href);
+
+    var msg = '<p>Please click the below link to join the room..</p><br /><a href="'+ window.location.href +'">'+ window.location.href +'</a>';
+    var data = {
+        toemail: this.state.toEmail,
+        subject: "Video chat room link",
+        mailbody: msg
+      };
+
+      const promise = $.ajax({
+        url: "/sendemail",
+        type: "POST",
+        data: data,
+        dataType: 'json'
+      });
+
+      promise.done(function(data){
+        this.setState({
+          toEmail: '',
+          isOpen: !this.state.isOpen
+        });
+      });
+
+      promise.fail(function(jqXhr){
+        console.log(jqXhr);
+        alert("Failed to send email, please try again...")
+        this.setState({
+          toEmail: '',
+          isOpen: !this.state.isOpen
+        });
+      });
+  }
+
   handleHangup = () => this.props.media.hangup()
   render(){
     return (      
@@ -107,8 +144,9 @@ class CommunicationContainer extends React.Component {
         handleHangup={this.handleHangup}
         handleInput={this.handleInput}
         handleInvitation={this.handleInvitation}
-        handleCopyLinkClick={this.toggleModal} />    
-        
+        handleCopyLinkClick={this.toggleModal} 
+        handleSendEmailClick = {this.handleSendEmailClick}
+        />        
     );
   }
 }
