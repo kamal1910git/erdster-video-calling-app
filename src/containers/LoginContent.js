@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { isNullOrUndefined } from 'util';
-var Carousel = require('nuka-carousel');
+import Carousel from 'nuka-carousel'
 
 export default class LoginContent extends React.Component {
 
@@ -39,6 +39,7 @@ export default class LoginContent extends React.Component {
       const rand =  Math.random() * ranValue;
       var tempToken = rand + '_' + this.state.username;
       localStorage.setItem('PRCUser_Token', JSON.stringify(tempToken));
+      localStorage.setItem('PRCUser_User', JSON.stringify(this.state.username));
       this.context.router.push('/home');
     }
     else
@@ -52,6 +53,8 @@ export default class LoginContent extends React.Component {
 
   componentWillMount() {
     localStorage.clear('PRCUser_Token');
+    localStorage.clear('PRCUser_User');
+    localStorage.clear('PRCUser_RoomId');
   }
 
   componentDidMount(){

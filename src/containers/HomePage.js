@@ -10,7 +10,8 @@ class HomePage extends React.Component {
     super(props);
   }
   state = {
-    value: new Date() - new Date().setHours(0, 0, 0, 0)
+    value: new Date() - new Date().setHours(0, 0, 0, 0),
+    username: JSON.parse(localStorage.getItem('PRCUser_User'))    
   }
   static contextTypes = {
     router: React.PropTypes.object
@@ -18,6 +19,7 @@ class HomePage extends React.Component {
   setRoom = () => this.setState({value: new Date() - new Date().setHours(0, 0, 0, 0)})
   joinRoom = e => {
     e.preventDefault();
+    localStorage.setItem('PRCUser_RoomId', JSON.stringify(this.state.value));
     this.context.router.push('r/' + this.state.value);
   }
   handleChange = e => this.setState({value: e.target.value})
@@ -25,6 +27,8 @@ class HomePage extends React.Component {
   handleLogoutClick = e => {
     e.preventDefault();
     localStorage.clear('PRCUser_Token');
+    localStorage.clear('PRCUser_User');
+    localStorage.clear('PRCUser_RoomId');
     this.context.router.push('/');
   }
 
@@ -102,9 +106,9 @@ class HomePage extends React.Component {
           <div className="container-fluid">
             <div id="navbar" className="navbar-collapse ">
               <ul className="nav navbar-nav">
-                <li className='cursor-indication'><a><span className="avatar"><img src="assets/img/user.png" /></span>&nbsp;<span className="proName"><strong>Nombre</strong></span></a></li>
-                <li className='cursor-indication'><a  id="sidemenuBtn"><span><img src="assets/img/scv-img/menu.svg" width={28} /></span></a></li>
-                <li className='cursor-indication' style={{paddingTop: 8}}><a ><i className="fa fa-circle" />&nbsp;<strong style={{fontSize: 16}}><Online>Online</Online><Offline>Offline</Offline></strong></a></li>
+                <li className='cursor-indication'><a><span className="avatar"><img src="assets/img/user.png" /></span>&nbsp;&nbsp;<span className="proName"><strong>{this.state.username}</strong></span></a></li>                
+                <li className='cursor-indication'><a id="sidemenuBtn"><span><img src="assets/img/scv-img/menu.svg" width={28} /></span></a></li>
+                <li className='cursor-indication' style={{paddingTop: 8}}><a ><i className="fa fa-circle" />&nbsp;<strong style={{fontSize: 16}}><Online>Online</Online><Offline>Offline</Offline></strong></a></li>                
               </ul>
               <ul className="nav navbar-nav navbar-right">                
                 <li className='cursor-indication'><a onClick={this.handleLogoutClick.bind(this)}><img src="assets/img/scv-img/logout.svg" width={28} /></a></li>

@@ -10,11 +10,17 @@ class RoomPage extends React.Component {
   constructor(props) {
     super(props);
   }
+  state = {
+    roomId: JSON.parse(localStorage.getItem('PRCUser_RoomId'))
+  }
+  
   getUserMedia = navigator.mediaDevices.getUserMedia({
     audio: true,
     video: true
   }).catch(e => alert('getUserMedia() error: ' + e.name))
+
   socket = io.connect()
+
   componentWillMount() {
     this.props.addRoom();
   }
@@ -27,7 +33,8 @@ class RoomPage extends React.Component {
           </div>
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav">
-              <li style={{paddingTop: 8}}><a href="#"><i className="fa fa-circle" />&nbsp;<strong style={{fontSize: 16}}><Online>Online</Online><Offline>Offline</Offline></strong></a></li>
+              <li className='cursor-indication'><a><span className="proName"><strong>Room Id: {this.state.roomId}</strong></span></a></li>
+              <li className='cursor-indication'><a href="#"><i className="fa fa-circle" />&nbsp;<strong style={{fontSize: 16}}><Online>Online</Online><Offline>Offline</Offline></strong></a></li>
             </ul>            
           </div>
         </div>

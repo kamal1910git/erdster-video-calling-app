@@ -98,7 +98,7 @@ class CommunicationContainer extends React.Component {
     this.props.setAudio(audio);
   }
   handleSendEmailClick = () => {
-    console.log("Send email call started");
+    
     var msg = '<p>Please click the below link to join the room..</p><br /><a href="'+ window.location.href +'">'+ window.location.href +'</a>';
     var data = {
         toemail: this.state.toEmail,
