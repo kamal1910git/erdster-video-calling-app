@@ -74,6 +74,7 @@ class CommunicationContainer extends React.Component {
 
   send = e => {
     e.preventDefault();
+    this.setState({message: "Hi"})
     this.props.socket.emit('auth', this.state);
     this.hideAuth();
   }
@@ -87,16 +88,19 @@ class CommunicationContainer extends React.Component {
   getContent(content) {
     return {__html: (new Remarkable()).render(content)};
   }
+
   toggleVideo = () => {
     const video = this.localStream.getVideoTracks()[0].enabled = !this.state.video;
     this.setState({video: video});
     this.props.setVideo(video);
   }
+
   toggleAudio = () => {
     const audio = this.localStream.getAudioTracks()[0].enabled = !this.state.audio;
     this.setState({audio: audio});
     this.props.setAudio(audio);
   }
+
   handleSendEmailClick = () => {
     
     var msg = '<p>Please click the below link to join the room..</p><br /><a href="'+ window.location.href +'">'+ window.location.href +'</a>';

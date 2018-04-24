@@ -42,20 +42,17 @@ const Communication = props =>
       <ReactTooltip place="top" type="info" effect="float" id="btnhangup"/>
       <ReactTooltip place="top" type="info" effect="float" id="btnfullscreen"/>
       <ReactTooltip place="top" type="info" effect="float" id="btnexit"/>
-
     </div>
     <form className="request-access">
-      <p className="paragraph"><span className="you-left">You hung up.&nbsp;</span>Send request to interviewer to join the room.</p>
-      <form onSubmit={props.send}>
-        <input type="text" autoFocus onChange={props.handleInput} data-ref="message"  maxLength="30" required />        
-        &nbsp;&nbsp;<button type="submit" className="btn btn-primary-small login-button">Send</button>
+      <p className="paragraph"><span className="you-left">You hung up.&nbsp;</span></p>
+      <form onSubmit={props.send}>        
+        &nbsp;&nbsp;<button type="submit" className="btn btn-primary-small login-button">Please click here to start the call</button>
       </form>
     </form>
     <div className="grant-access">
-      <p className="paragraph">A interviewee has sent you a message to join the room:</p>
-      <div dangerouslySetInnerHTML={props.getContent(props.message)}></div>
-      <button onClick={props.handleInvitation} data-ref="reject" className="btn btn-primary-small login-button btn-grey">Reject</button>&nbsp;&nbsp;
-      <button onClick={props.handleInvitation} data-ref="accept" className="btn btn-primary-small login-button">Accept</button>
+      <p className="paragraph">User has requested to join the call</p>
+      <div dangerouslySetInnerHTML={props.getContent(props.message)}></div>      
+      <button onClick={props.handleInvitation} data-ref="accept" className="btn btn-primary-small login-button">Click here</button>
     </div>
     <div className="room-occupied">
       <p className="paragraph">Please, try another room!</p>
