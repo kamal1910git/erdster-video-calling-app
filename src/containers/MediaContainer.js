@@ -13,7 +13,8 @@ export default class MediaBridge extends React.Component {
     bridge: '',
     user: '',
     recordVideo: null,
-    dataStream: null
+    dataStream: null,
+    record: false
   }
   componentWillMount() {
     // chrome polyfill for connection between the local device and a remote peer
@@ -70,7 +71,7 @@ export default class MediaBridge extends React.Component {
       };
       this.dc.onclose = () => {
         this.remoteStream.getVideoTracks()[0].stop();
-        // this.stopRecord(); TODO:: We need to enable..
+        this.stopRecord();
         console.log('The Data Channel is Closed');
       };
   }
@@ -93,24 +94,27 @@ export default class MediaBridge extends React.Component {
   }
 
   stopRecord() {
-    console.log('Recording stopping...')
-    this.state.recordVideo.stopRecording(() => {
-      let params = {
-        type: 'video/webm',
-        data: this.state.recordVideo.blob,
-        id: Math.floor(Math.random()*90000) + 10000
-      }
-      // Upload video to S3   
-      S3Upload(params)
-      .then((success) => {
-        console.log('enter then statement');
-        if(success) {
-          console.log(success);
-        }
-      }, (error) => {
-        alert(error, 'error occurred. check your aws settings and try again.');
-      })   
-    });
+    console.log('Recording stopping...');
+      if(this.state.recordVideo.blob)
+      {
+        this.state.recordVideo.stopRecording(() => {
+          let params = {
+            type: 'video/webm',
+            data: this.state.recordVideo.blob,
+            id: Math.floor(Math.random()*90000) + 10000
+          }
+          // Upload video to S3   
+          S3Upload(params)
+          .then((success) => {
+            console.log('enter then statement');
+            if(success) {
+              console.log(success);
+            }
+          }, (error) => {
+            alert(error, 'error occurred. check your aws settings and try again.');
+          })   
+        });
+    }
   }
 
 
@@ -192,7 +196,9 @@ export default class MediaBridge extends React.Component {
         this.setState({dataStream: e.stream});
         this.remoteVideo.src = window.URL.createObjectURL(this.remoteStream);
         this.setState({bridge: 'established'});
-        //this.startRecord(); // TODO:: We need to enable..
+        alert(this.state.record);
+        if(this.state.record)
+           this.startRecord();
     };
     this.pc.ondatachannel = e => {
         // data channel
@@ -216,8 +222,8 @@ export default class MediaBridge extends React.Component {
   render(){
     return (
         <div className={`media-bridge ${this.state.bridge}`}>
-          <video id='remote-video' className="remote-video" ref={(ref) => this.remoteVideo = ref} autoPlay playsinline></video>
-          <video id='local-video' className="local-video" ref={(ref) => this.localVideo = ref} autoPlay muted playsinline></video>
+          <video id="remote-video" className="remote-video" ref={(ref) => this.remoteVideo = ref} autoPlay playsinline></video>
+          <video id="local-video" className="local-video" ref={(ref) => this.localVideo = ref} autoPlay muted playsinline></video>
         </div>      
     );
   }

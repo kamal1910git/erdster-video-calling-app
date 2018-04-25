@@ -8,7 +8,8 @@ const mapStoreToStorage = () =>
 		{
 			rooms: new Set(),
 			video: true,
-			audio: true
+			audio: true,
+			record: false
 		};
 const store = createStore(reducers, persistedState);
 store.subscribe(mapStoreToStorage);

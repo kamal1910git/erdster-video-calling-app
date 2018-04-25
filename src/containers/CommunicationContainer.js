@@ -19,6 +19,7 @@ class CommunicationContainer extends React.Component {
     video: React.PropTypes.bool.isRequired,
     setVideo: React.PropTypes.func.isRequired,
     setAudio: React.PropTypes.func.isRequired,
+    setRecord: React.PropTypes.func.isRequired,
     media: React.PropTypes.instanceOf(MediaContainer)
   }
   state = {
@@ -26,6 +27,7 @@ class CommunicationContainer extends React.Component {
     message: '',
     audio: true,
     video: true,
+    record: false,
     isOpen: false,
     toEmail: ''
   }
@@ -35,17 +37,10 @@ class CommunicationContainer extends React.Component {
   } 
   full = () => this.props.media.setState({bridge: 'full'})
 
-  toggleModal = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-    
-    this.props.setAudio(this.state.isOpen);       
-  }
-
   componentWillMount() {
     this.setState({video: this.props.video});
     this.setState({audio: this.props.audio});
+    this.setState({record: this.props.record});
   }
 
   componentDidMount() {
@@ -89,6 +84,14 @@ class CommunicationContainer extends React.Component {
     return {__html: (new Remarkable()).render(content)};
   }
 
+  toggleModal = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+    
+    this.props.setAudio(this.state.isOpen);       
+  }
+
   toggleVideo = () => {
     const video = this.localStream.getVideoTracks()[0].enabled = !this.state.video;
     this.setState({video: video});
@@ -99,6 +102,13 @@ class CommunicationContainer extends React.Component {
     const audio = this.localStream.getAudioTracks()[0].enabled = !this.state.audio;
     this.setState({audio: audio});
     this.props.setAudio(audio);
+  }
+
+  toggleRecord = () => {
+    alert(this.state.record);
+    this.setState({record: !this.state.record});
+    this.props.setRecord(record);
+    this.props.media.setState({record: this.state.record});
   }
 
   handleSendEmailClick = () => {
@@ -154,7 +164,7 @@ class CommunicationContainer extends React.Component {
     );
   }
 }
-const mapStateToProps = store => ({video: store.video, audio: store.audio});
+const mapStateToProps = store => ({video: store.video, audio: store.audio, record: store.record});
 const mapDispatchToProps = dispatch => (
     {
       setVideo: boo => store.dispatch({type: 'SET_VIDEO', video: boo}),

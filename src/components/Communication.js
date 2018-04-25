@@ -21,6 +21,14 @@ const Communication = props =>
           <path className="off" d="M24 28c3.31 0 5.98-2.69 5.98-6L30 10c0-3.32-2.68-6-6-6-3.31 0-6 2.68-6 6v12c0 3.31 2.69 6 6 6zm10.6-6c0 6-5.07 10.2-10.6 10.2-5.52 0-10.6-4.2-10.6-10.2H10c0 6.83 5.44 12.47 12 13.44V42h4v-6.56c6.56-.97 12-6.61 12-13.44h-3.4z" fill="white"></path>
         </svg>
       </button>    
+      <button data-tip='Record On/off' data-for='btnrecord' onClick={props.toggleAudio} className={'record-button-' + props.audio}>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 426.667 426.667" style={{enableBackground: 'new 0 0 426.667 426.667'}} xmlSpace="preserve" className="svg">
+          <path d="M213.333,0C95.68,0,0,95.68,0,213.333s95.68,213.333,213.333,213.333s213.333-95.68,213.333-213.333S330.987,0,213.333,0
+          z M213.333,384c-94.08,0-170.667-76.587-170.667-170.667S119.253,42.667,213.333,42.667S384,119.253,384,213.333
+          S307.413,384,213.333,384z" />
+          <path d="M213.333,149.333c-35.307,0-64,28.693-64,64s28.693,64,64,64s64-28.693,64-64S248.64,149.333,213.333,149.333z" />
+        </svg>
+      </button>
       <button data-tip='Hangup' data-for='btnhangup' onClick={props.handleHangup} className="hangup-button">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" className="svg">
           <path d="M24 18c-3.21 0-6.3.5-9.2 1.44v6.21c0 .79-.46 1.47-1.12 1.8-1.95.98-3.74 2.23-5.33 3.7-.36.35-.85.57-1.4.57-.55 0-1.05-.22-1.41-.59L.59 26.18c-.37-.37-.59-.87-.59-1.42 0-.55.22-1.05.59-1.42C6.68 17.55 14.93 14 24 14s17.32 3.55 23.41 9.34c.37.36.59.87.59 1.42 0 .55-.22 1.05-.59 1.41l-4.95 4.95c-.36.36-.86.59-1.41.59-.54 0-1.04-.22-1.4-.57-1.59-1.47-3.38-2.72-5.33-3.7-.66-.33-1.12-1.01-1.12-1.8v-6.21C30.3 18.5 27.21 18 24 18z" fill="white"></path>
@@ -39,6 +47,7 @@ const Communication = props =>
       </Link>
       <ReactTooltip place="top" type="info" effect="float" id="btnvideo"/>
       <ReactTooltip place="top" type="info" effect="float" id="btnaudio"/>
+      <ReactTooltip place="top" type="info" effect="float" id="btnrecord"/>
       <ReactTooltip place="top" type="info" effect="float" id="btnhangup"/>
       <ReactTooltip place="top" type="info" effect="float" id="btnfullscreen"/>
       <ReactTooltip place="top" type="info" effect="float" id="btnexit"/>
@@ -60,7 +69,7 @@ const Communication = props =>
     </div>
     <div className="waiting">
       <p className="paragraph">
-      <a onClick={props.handleCopyLinkClick}>Click here to share the room link</a>
+      <a style={{ fontSize: '1.5em'}} onClick={props.handleCopyLinkClick}>Invite by Email</a>
           { props.isOpen &&
            <div className="container">
                     <Dialog title="Share the link"
@@ -91,6 +100,7 @@ Communication.propTypes = {
   video: React.PropTypes.bool.isRequired,
   toggleVideo: React.PropTypes.func.isRequired,
   toggleAudio: React.PropTypes.func.isRequired,
+  toggleRecord: React.PropTypes.func.isRequired,
   getContent: React.PropTypes.func.isRequired,
   send: React.PropTypes.func.isRequired,
   handleHangup: React.PropTypes.func.isRequired,

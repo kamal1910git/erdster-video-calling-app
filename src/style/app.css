@@ -11,7 +11,9 @@
 .audio-button-false,
 .video-button-true,
 .video-button-false,
-.fullscreen-button {
+.fullscreen-button,
+.record-button-true,
+.record-button-false {
     width: 3em;
     height: 3em;
     border-radius: 50%;
@@ -29,6 +31,8 @@
 .hangup-button:hover,
 .audio-button-true:hover,
 .audio-button-false:hover,
+.record-button-true:hover,
+.record-button-false:hover,
 .video-button-true:hover,
 .video-button-false:hover,
 .fullscreen-button:hover {
@@ -40,7 +44,9 @@
 .hangup-button,
 .audio-button-true .on,
 .video-button-true .on,
+.record-button-true .on,
 .video-button-false .off,
+.record-button-false .off,
 .fullscreen-button .on,
 .room-occupied {
 	display: none;
@@ -208,6 +214,7 @@
     background-color: #f4146f !important;
     color: #fff !important;
     font-weight: bold !important;
+    z-index:99 !important;
 }
 
 .emailText{
