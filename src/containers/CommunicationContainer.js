@@ -17,6 +17,7 @@ class CommunicationContainer extends React.Component {
     getUserMedia: React.PropTypes.object.isRequired,
     audio: React.PropTypes.bool.isRequired,
     video: React.PropTypes.bool.isRequired,
+    record: React.PropTypes.bool.isRequired,
     setVideo: React.PropTypes.func.isRequired,
     setAudio: React.PropTypes.func.isRequired,
     setRecord: React.PropTypes.func.isRequired,
@@ -107,7 +108,7 @@ class CommunicationContainer extends React.Component {
   toggleRecord = () => {
     alert(this.state.record);
     this.setState({record: !this.state.record});
-    this.props.setRecord(record);
+    this.props.setRecord(this.state.record);
     this.props.media.setState({record: this.state.record});
   }
 
@@ -153,6 +154,7 @@ class CommunicationContainer extends React.Component {
         {...this.state}
         toggleVideo={this.toggleVideo}
         toggleAudio={this.toggleAudio}
+        toggleRecord={this.toggleRecord}
         getContent={this.getContent}
         send={this.send}
         handleHangup={this.handleHangup}
@@ -168,7 +170,8 @@ const mapStateToProps = store => ({video: store.video, audio: store.audio, recor
 const mapDispatchToProps = dispatch => (
     {
       setVideo: boo => store.dispatch({type: 'SET_VIDEO', video: boo}),
-      setAudio: boo => store.dispatch({type: 'SET_AUDIO', audio: boo})
+      setAudio: boo => store.dispatch({type: 'SET_AUDIO', audio: boo}),
+      setRecord: boo => store.dispatch({type: 'SET_RECORD', record: boo})
     }
   );
 export default connect(mapStateToProps, mapDispatchToProps)(CommunicationContainer);

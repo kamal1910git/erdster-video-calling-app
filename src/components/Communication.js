@@ -21,12 +21,13 @@ const Communication = props =>
           <path className="off" d="M24 28c3.31 0 5.98-2.69 5.98-6L30 10c0-3.32-2.68-6-6-6-3.31 0-6 2.68-6 6v12c0 3.31 2.69 6 6 6zm10.6-6c0 6-5.07 10.2-10.6 10.2-5.52 0-10.6-4.2-10.6-10.2H10c0 6.83 5.44 12.47 12 13.44V42h4v-6.56c6.56-.97 12-6.61 12-13.44h-3.4z" fill="white"></path>
         </svg>
       </button>    
-      <button data-tip='Record On/off' data-for='btnrecord' onClick={props.toggleAudio} className={'record-button-' + props.audio}>
+      <button data-tip='Record On/off' data-for='btnrecord' onClick={props.toggleRecord} className={'record-button-' + props.record}>
         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 426.667 426.667" style={{enableBackground: 'new 0 0 426.667 426.667'}} xmlSpace="preserve" className="svg">
-          <path d="M213.333,0C95.68,0,0,95.68,0,213.333s95.68,213.333,213.333,213.333s213.333-95.68,213.333-213.333S330.987,0,213.333,0
+          <path className="on" d="M213.333,0C95.68,0,0,95.68,0,213.333s95.68,213.333,213.333,213.333s213.333-95.68,213.333-213.333S330.987,0,213.333,0
           z M213.333,384c-94.08,0-170.667-76.587-170.667-170.667S119.253,42.667,213.333,42.667S384,119.253,384,213.333
           S307.413,384,213.333,384z" />
-          <path d="M213.333,149.333c-35.307,0-64,28.693-64,64s28.693,64,64,64s64-28.693,64-64S248.64,149.333,213.333,149.333z" />
+          <path className="on" d="M213.333,149.333c-35.307,0-64,28.693-64,64s28.693,64,64,64s64-28.693,64-64S248.64,149.333,213.333,149.333z" />
+          <path className="off" d="M24 28c3.31 0 5.98-2.69 5.98-6L30 10c0-3.32-2.68-6-6-6-3.31 0-6 2.68-6 6v12c0 3.31 2.69 6 6 6zm10.6-6c0 6-5.07 10.2-10.6 10.2-5.52 0-10.6-4.2-10.6-10.2H10c0 6.83 5.44 12.47 12 13.44V42h4v-6.56c6.56-.97 12-6.61 12-13.44h-3.4z" fill="white"></path>
         </svg>
       </button>
       <button data-tip='Hangup' data-for='btnhangup' onClick={props.handleHangup} className="hangup-button">
@@ -98,6 +99,7 @@ Communication.propTypes = {
   message: React.PropTypes.string.isRequired,
   audio: React.PropTypes.bool.isRequired,
   video: React.PropTypes.bool.isRequired,
+  record: React.PropTypes.bool.isRequired,
   toggleVideo: React.PropTypes.func.isRequired,
   toggleAudio: React.PropTypes.func.isRequired,
   toggleRecord: React.PropTypes.func.isRequired,
