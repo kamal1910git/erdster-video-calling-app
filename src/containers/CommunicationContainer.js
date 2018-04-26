@@ -106,7 +106,6 @@ class CommunicationContainer extends React.Component {
   }
 
   toggleRecord = () => {
-    alert(this.state.record);
     this.setState({record: !this.state.record});
     this.props.setRecord(this.state.record);
     this.props.media.setState({record: this.state.record});
