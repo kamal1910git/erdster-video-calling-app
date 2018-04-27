@@ -2,27 +2,23 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Offline, Online } from 'react-detect-offline';
 import $ from 'jquery'
-import Home from '../components/Home'
+import RoomsTable from '../components/RoomsTable'
 import store from '../store'
 
-class HomePage extends React.Component {
+export default class RoomList extends React.Component {
+
   constructor(props) {
     super(props);
   }
+
   state = {
     value: new Date() - new Date().setHours(0, 0, 0, 0),
     username: JSON.parse(localStorage.getItem('PRCUser_User'))    
   }
+
   static contextTypes = {
     router: React.PropTypes.object
   }
-  setRoom = () => this.setState({value: new Date() - new Date().setHours(0, 0, 0, 0)})
-  joinRoom = e => {
-    e.preventDefault();
-    localStorage.setItem('PRCUser_RoomId', JSON.stringify(this.state.value));
-    this.context.router.push('r/' + this.state.value);
-  }
-  handleChange = e => this.setState({value: e.target.value})
 
   handleLogoutClick = e => {
     e.preventDefault();
@@ -39,7 +35,7 @@ class HomePage extends React.Component {
       this.context.router.push('/');
     }
     else{
-      this.context.router.push('/roomlist');
+      this.context.router.push('/home');
     } 
   }
 
@@ -119,41 +115,29 @@ class HomePage extends React.Component {
         <div className="container-fluid main-panel">
           <div className="sidebar pull-left">
             <ul className="ullist">
-              <li className='cursor-indication'><a  className="active"><img src="assets/img/create-room-a.png" /><span>Create Room</span></a></li>
-              <li className='cursor-indication'><a onClick={this.handleLeftNavClick.bind(this)}><img src="assets/img/meeting.png" /><span>Room List</span></a></li>
+              <li className='cursor-indication'><a  onClick={this.handleLeftNavClick.bind(this)}><img src="assets/img/create-room.png" /><span>Create Room</span></a></li>
+              <li className='cursor-indication'><a className="active"><img src="assets/img/meeting-a.png" /><span>Room List</span></a></li>
             </ul>
           </div>
-          <div className="content-area">
-            <div className="row">
-              <div className="col-md-12">
-                <div className="panel panel-default card-wizard panel-bg">
-                  <div className="panel-body">
-                    <div className="row">
-                      <div className="col-md-6">
-                        <div className="col-md-6 col-sm-4 col-xs-4 ">
-                          <img src="assets/img/prc-logo.png" className="img-responsive" />
-                        </div>
-                        <div className="clearfix" />
-                      </div>
-                      <div className="col-md-6">
-                        <div className="col-md-8 col-sm-12 col-xs-12">                          
-                              <Home
-                              roomId={this.state.value}
-                              handleChange={this.handleChange}
-                              joinRoom={this.joinRoom}
-                              setRoom={this.setRoom}
-                              rooms={this.props.rooms}></Home>						  
-                          <div className="col-md-6 col-sm-6 col-xs-6 pull-right">
-                            <img src="assets/img/erdster-logo.png" className="margin-top-50 pull-right img-responsive" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+          
+         <div className="content-area">  
+          <div className="row">
+            <div className="col-md-12">            
+              <div className="panel panel-default">
+                <div className="panel-heading style-title">
+                  <h3 className="panel-title">Rooms List</h3>                  
+                  <div className="clearfix" />
+                </div>
+                <div className="panel-body">
+                  <RoomsTable />
+                </div>
+                <div className="panel-footer">
                 </div>
               </div>
             </div>
-          </div>
+          </div>      
+        </div>
+        
         </div>
         <footer>
           <img src="assets/img/prc-logo.png" className="img-responsive pull-right footer-img" />
@@ -162,5 +146,3 @@ class HomePage extends React.Component {
     );
   }
 }
-const mapStateToProps = store => ({rooms: new Set([...store.rooms])});
-export default connect(mapStateToProps)(HomePage);

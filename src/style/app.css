@@ -224,3 +224,11 @@
     border-color: #ccc;
     font-size: 1.2em;
 }
+
+.ReactTable .rt-thead.-header{
+    color: #7c64a8 !important;
+}
+
+.ReactTable .rt-tbody{
+    color: #7c64a8 !important;
+}

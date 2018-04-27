@@ -14,8 +14,17 @@ module.exports = {
         exclude: /node_modules/,
         loaders: ['babel-loader', 'eslint-loader']
       },
-      { test: /\.css$/, loader: "style-loader!css-loader" },
-      { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' }
+      { 
+        test: /\.css$/, 
+        loader: "style-loader!css-loader" 
+      },
+      { 
+        test: /\.(png|jpg)$/, 
+        loader: 'url-loader?limit=8192' 
+      },
+      { test: /\.json$/,
+        loader: 'json-loader'
+      }
     ]
   },
   plugins:[
@@ -26,6 +35,9 @@ module.exports = {
     })
   ],
   resolve: {
-    extensions: ['', '.js', '.json','.css']
+    extensions: ['', '.js', '.json','.css'],
+      alias: {          
+          'json-loader': 'json-loader/index.js'
+      }
   }
 };
