@@ -232,3 +232,7 @@
 .ReactTable .rt-tbody{
     color: #7c64a8 !important;
 }
+
+.__react_component_tooltip.type-info {
+    font-family: 'Roboto', sans-serif !important;
+}
