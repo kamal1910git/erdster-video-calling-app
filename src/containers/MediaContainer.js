@@ -196,9 +196,7 @@ export default class MediaBridge extends React.Component {
         this.setState({dataStream: e.stream});
         this.remoteVideo.src = window.URL.createObjectURL(this.remoteStream);
         this.setState({bridge: 'established'});
-        alert(this.state.record);
-        if(this.state.record)
-           this.startRecord();
+        this.startRecord();
     };
     this.pc.ondatachannel = e => {
         // data channel
