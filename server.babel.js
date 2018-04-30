@@ -50,7 +50,7 @@ else {
 app.use(bodyParser.json());
 
 app.use('/s3', s3Router({
-  bucket: 'erdstervideo',
+  bucket: process.env.S3_BUCKET,
   ACL: 'public-read'
 }));
 
