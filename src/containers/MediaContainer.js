@@ -13,8 +13,7 @@ export default class MediaBridge extends React.Component {
     bridge: '',
     user: '',
     recordVideo: null,
-    dataStream: null,
-    record: false
+    dataStream: null
   }
   componentWillMount() {
     // chrome polyfill for connection between the local device and a remote peer
@@ -95,26 +94,23 @@ export default class MediaBridge extends React.Component {
 
   stopRecord() {
     console.log('Recording stopping...');
-      if(this.state.recordVideo.blob)
-      {
-        this.state.recordVideo.stopRecording(() => {
-          let params = {
-            type: 'video/webm',
-            data: this.state.recordVideo.blob,
-            id: Math.floor(Math.random()*90000) + 10000
-          }
-          // Upload video to S3   
-          S3Upload(params)
-          .then((success) => {
-            console.log('enter then statement');
-            if(success) {
-              console.log(success);
-            }
-          }, (error) => {
-            alert(error, 'error occurred. check your aws settings and try again.');
-          })   
-        });
-    }
+    this.state.recordVideo.stopRecording(() => {
+      let params = {
+        type: 'video/webm',
+        data: this.state.recordVideo.blob,
+        id: Math.floor(Math.random()*90000) + 10000
+      }
+      // Upload video to S3   
+      S3Upload(params)
+      .then((success) => {
+        console.log('enter then statement');
+        if(success) {
+          console.log(success);
+        }
+      }, (error) => {
+        alert(error, 'error occurred. check your aws settings and try again.');
+      })   
+    });
   }
 
 
