@@ -40,6 +40,7 @@ export default class LoginContent extends React.Component {
       var tempToken = rand + '_' + this.state.username;
       localStorage.setItem('PRCUser_Token', JSON.stringify(tempToken));
       localStorage.setItem('PRCUser_User', JSON.stringify(this.state.username));
+      localStorage.setItem('PRCUser_Record', JSON.stringify(false));
       this.context.router.push('/home');
     }
     else
@@ -55,6 +56,7 @@ export default class LoginContent extends React.Component {
     localStorage.clear('PRCUser_Token');
     localStorage.clear('PRCUser_User');
     localStorage.clear('PRCUser_RoomId');
+    localStorage.clear('PRCUser_Record');
   }
 
   componentDidMount(){

@@ -106,9 +106,10 @@ class CommunicationContainer extends React.Component {
   }
 
   toggleRecord = () => {
-    this.setState({record: !this.state.record});
-    this.props.setRecord(this.state.record);
-    this.props.media.setState({record: this.state.record});
+    var isRecord = JSON.parse(localStorage.getItem('PRCUser_Record'));    
+    localStorage.setItem('PRCUser_Record', JSON.stringify(!isRecord));
+    this.setState({record: JSON.parse(localStorage.getItem('PRCUser_Record'))});
+    this.props.setRecord(JSON.parse(localStorage.getItem('PRCUser_Record')));
   }
 
   handleSendEmailClick = () => {

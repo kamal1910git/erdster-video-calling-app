@@ -4,6 +4,9 @@ import { S3Upload } from '../components/AppUtils';
 import { Offline, Online } from 'react-detect-offline';
 
 export default class MediaBridge extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   static propTypes = {
     socket: React.PropTypes.object.isRequired,
     getUserMedia: React.PropTypes.object.isRequired,
@@ -84,7 +87,10 @@ export default class MediaBridge extends React.Component {
   }
 
   startRecord() {
-    console.log('Recording started...' + this.state.dataStream);
+    var isRecord = JSON.parse(localStorage.getItem('PRCUser_Record'));
+    if(isRecord){
+       console.log('Recording started...' + this.state.dataStream);
+    }
     this.state.recordVideo = RecordRTC(this.state.dataStream, { type: 'video' });
       this.state.recordVideo.startRecording();
     setTimeout(() => {
@@ -93,23 +99,32 @@ export default class MediaBridge extends React.Component {
   }
 
   stopRecord() {
-    console.log('Recording stopping...');
+    var isRecord = JSON.parse(localStorage.getItem('PRCUser_Record'));
+    console.log('Recording stopping...' + isRecord);
     this.state.recordVideo.stopRecording(() => {
       let params = {
         type: 'video/webm',
         data: this.state.recordVideo.blob,
         id: Math.floor(Math.random()*90000) + 10000
       }
-      // Upload video to S3   
-      S3Upload(params)
-      .then((success) => {
-        console.log('enter then statement');
-        if(success) {
-          console.log(success);
-        }
-      }, (error) => {
-        alert(error, 'error occurred. check your aws settings and try again.');
-      })   
+      if(isRecord)
+      {
+        console.log('Recording upload started...');
+        // Upload video to S3   
+        S3Upload(params)
+        .then((success) => {
+          console.log('enter then statement');
+          if(success) {
+            console.log(success);
+          }
+        }, (error) => {
+          alert(error, 'error occurred. check your aws settings and try again.');
+        })
+    }
+    else
+    {
+      console.log("Nothing uploaded...")
+    }   
     });
   }
 

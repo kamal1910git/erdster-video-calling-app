@@ -25,6 +25,7 @@ export default class RoomList extends React.Component {
     localStorage.clear('PRCUser_Token');
     localStorage.clear('PRCUser_User');
     localStorage.clear('PRCUser_RoomId');
+    localStorage.clear('PRCUser_Record');
     this.context.router.push('/');
   }
 
