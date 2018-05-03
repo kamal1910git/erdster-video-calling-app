@@ -16,12 +16,43 @@ class HomePage extends React.Component {
   static contextTypes = {
     router: React.PropTypes.object
   }
+
+  getInitialState = () => {  
+    return { RoomId: '' ,RoomName: '',StorageURL:'',AssignedTo:'',CreatedBy:'', UpdatedBy:'',data1: []};  
+  }
+  
   setRoom = () => this.setState({value: new Date() - new Date().setHours(0, 0, 0, 0)})
+
   joinRoom = e => {
     e.preventDefault();
     localStorage.setItem('PRCUser_RoomId', JSON.stringify(this.state.value));
-    this.context.router.push('r/' + this.state.value);
+    
+    var roomList = {  
+        'RoomId': this.state.value,  
+        'RoomName': this.state.value,
+        'StorageURL':"",  
+        'AssignedTo':"",  
+        'CreatedBy':JSON.parse(localStorage.getItem('PRCUser_User')),  
+        'UpdatedBy':""      
+    }
+
+    $.ajax({  
+      url: "/api/SaveRoomList",  
+      dataType: 'json',  
+      type: 'POST',  
+      data: roomList,  
+      success: function(data) {
+          console.log("roomlist created..")
+          this.setState(this.getInitialState());  
+          this.context.router.push('r/' + this.state.value);
+           
+      }.bind(this),  
+      error: function(xhr, status, err) {  
+        console.log(err);
+      }.bind(this)  
+    });     
   }
+
   handleChange = e => this.setState({value: e.target.value})
 
   handleLogoutClick = e => {

@@ -12,7 +12,7 @@
     "prod": "NODE_ENV=production node server.js",
     "postinstall": "webpack -p --config ./webpack.config.js --progress"
   },
-  "author": "",
+  "author": "Kamalakannan Ayyau",
   "license": "",
   "dependencies": {
     "@sendgrid/mail": "^6.2.1",
@@ -36,6 +36,8 @@
     "express-session": "^1.14.1",
     "jquery": "^3.3.1",
     "lodash": "^4.17.10",
+    "mongoose": "^5.0.17",
+    "morgan": "^1.9.0",
     "node-datetime": "^2.0.6",
     "nodemailer": "^4.6.4",
     "nuka-carousel": "^4.1.0",
