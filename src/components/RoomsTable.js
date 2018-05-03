@@ -82,6 +82,10 @@ export default class RoomsTable extends React.Component {
         <ReactTable
           columns={[
             {
+              Header: "Room Id",
+              accessor: "RoomId"
+            },
+            {
               Header: "Room Name",
               accessor: "RoomName"
             },
@@ -90,8 +94,20 @@ export default class RoomsTable extends React.Component {
               accessor: "RoomUrl"
             },
             {
-              Header: "Video Size",
-              accessor: "videosize"
+              Header: "Status",
+              accessor: "Status"
+            },            
+            {
+              Header: "S3 URL",
+              accessor: "StorageURL"
+            },
+            {
+              Header: "Assigned To",
+              accessor: "AssignedTo"
+            },
+            {
+              Header: "Created By",
+              accessor: "CreatedBy"
             }
           ]}
           manual 
@@ -100,7 +116,7 @@ export default class RoomsTable extends React.Component {
           loading={loading} 
           onFetchData={this.fetchData} 
           filterable
-          defaultPageSize={10}
+          defaultPageSize={5}
           className="-striped -highlight"
         />
         <br />

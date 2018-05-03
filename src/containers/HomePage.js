@@ -26,10 +26,10 @@ class HomePage extends React.Component {
   joinRoom = e => {
     e.preventDefault();
     localStorage.setItem('PRCUser_RoomId', JSON.stringify(this.state.value));
-    
     var roomList = {  
         'RoomId': this.state.value,  
         'RoomName': this.state.value,
+        'RoomUrl': window.location.origin + '/r/' + this.state.value,
         'StorageURL':"",  
         'AssignedTo':"",  
         'CreatedBy':JSON.parse(localStorage.getItem('PRCUser_User')),  

@@ -11,15 +11,13 @@ const range = len => {
 const newPerson = () => {
   const statusChance = Math.random();
   return {
+    RoomId: "12345",
     RoomName: "dummy room",
     RoomUrl: "dummy room url",
-    videosize: Math.floor(Math.random() * 30),
-    visits: Math.floor(Math.random() * 100),
-    progress: Math.floor(Math.random() * 100),
-    status:
-      statusChance > 0.66
-        ? "relationship"
-        : statusChance > 0.33 ? "complicated" : "single"
+    Status: "Active",
+    StorageURL: "",
+    AssignedTo: "",
+    CreatedBy: ""
   };
 };
 

@@ -15,7 +15,8 @@ module.exports =db;
 
     var RoomListModelSchema = new mongoose.Schema({
         RoomId: String, 
-        RoomName: String,    
+        RoomName: String,   
+        RoomUrl: String, 
         DateOpened: { type: Date, default: Date.now },    
         Status: { type: String, default: "Active" },
         StorageURL: String,
@@ -41,7 +42,7 @@ module.exports =db;
     })
 
     app.post("/api/UpdateRoomlist",function(req,res) {   
-        model.findByIdAndUpdate(req.body.RoomId, { RoomName: req.body.RoomName, StorageURL: req.body.StorageURL, AssignedTo: req.body.AssignedTo, UpdatedBy:req.body.UpdatedBy, IsActive:req.body.IsActive, IsDeleted:req.body.IsDeleted },   
+        model.findByIdAndUpdate(req.body.RoomId, { RoomName: req.body.RoomName, RoomUrl: req.body.RoomUrl, StorageURL: req.body.StorageURL, AssignedTo: req.body.AssignedTo, UpdatedBy:req.body.UpdatedBy, IsActive:req.body.IsActive, IsDeleted:req.body.IsDeleted },   
         function(err) {  
             if (err) {  
                 res.send(err);  

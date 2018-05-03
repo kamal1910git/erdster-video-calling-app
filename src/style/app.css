@@ -236,3 +236,19 @@
 .__react_component_tooltip.type-info {
     font-family: 'Roboto', sans-serif !important;
 }
+
+.ReactTable .-pagination .-next, .ReactTable .-pagination .-previous {
+    -ms-flex: 1;
+    flex: 0.5;
+    text-align: center;
+    background-color: #7c64a8!important;
+    color: #fff !important;
+}
+
+.ReactTable .-pagination .-btn {
+    color: #fff !important;
+}
+
+.ReactTable .rt-td, .ReactTable .rt-th{
+    text-align: center !important;
+}
