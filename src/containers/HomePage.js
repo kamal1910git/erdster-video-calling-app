@@ -26,29 +26,50 @@ class HomePage extends React.Component {
   joinRoom = e => {
     e.preventDefault();
     localStorage.setItem('PRCUser_RoomId', JSON.stringify(this.state.value));
-    var roomList = {  
-        'RoomId': this.state.value,  
-        'RoomName': this.state.value,
-        'RoomUrl': window.location.origin + '/r/' + this.state.value,
-        'StorageURL':"",  
-        'AssignedTo':"",  
-        'CreatedBy':JSON.parse(localStorage.getItem('PRCUser_User')),  
-        'UpdatedBy':""      
-    }
-
+    
+    var room = null;
     $.ajax({  
-      url: "/api/SaveRoomList",  
+      url: "/api/GetRoomlistByName/" + this.state.value,  
+      type: "GET",  
       dataType: 'json',  
-      type: 'POST',  
-      data: roomList,  
-      success: function(data) {
-          console.log("roomlist created..")
-          this.setState(this.getInitialState());  
-          this.context.router.push('r/' + this.state.value);
-           
+      ContentType: 'application/json',  
+      success: function(data) {        
+        room = data;
+        console.log("room id:" + room);
+        if(room === null || room ==="" || room === undefined || room.length == 0)
+        {
+          var roomList = {  
+            'RoomId': this.state.value,  
+            'RoomName': this.state.value,
+            'RoomUrl': window.location.origin + '/r/' + this.state.value,
+            'StorageURL':"",  
+            'AssignedTo':"",  
+            'CreatedBy':JSON.parse(localStorage.getItem('PRCUser_User')),  
+            'UpdatedBy':""      
+          }      
+          $.ajax({  
+            url: "/api/SaveRoomList",  
+            dataType: 'json',  
+            type: 'POST',  
+            data: roomList,  
+            success: function(data) {
+                console.log("roomlist created..")
+                this.setState(this.getInitialState());  
+                this.context.router.push('r/' + this.state.value);
+                
+            }.bind(this),  
+            error: function(xhr, status, err) {  
+              console.log(err);
+            }.bind(this)  
+          });     
+        }
+        else
+        {
+          alert("RoomId is already exists.");
+        }        
       }.bind(this),  
-      error: function(xhr, status, err) {  
-        console.log(err);
+      error: function(jqXHR) {  
+        console.log(jqXHR);               
       }.bind(this)  
     });     
   }

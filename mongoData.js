@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var ObjectId = require('mongodb').ObjectID;
 
 module.exports = function(app) {
 
@@ -74,12 +75,12 @@ module.exports =db;
             });  
        }) 
 
-       app.get("/api/GetRoomlistByName/:RoomId",function(req,res){   
-        model.findById(req.params.RoomId,function(err,data){  
+       app.get("/api/GetRoomlistByName/:RoomId",function(req,res){  
+        model.find({RoomId: req.params.RoomId},function(err,data){  
             if(err){  
                 res.send(err);  
             }  
-            else{             
+            else{        
                 res.send(data);  
                 }  
             });  
