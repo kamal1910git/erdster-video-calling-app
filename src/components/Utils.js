@@ -8,7 +8,7 @@ const range = len => {
   return arr;
 };
 
-const newPerson = () => {
+const newRoom = () => {
   const statusChance = Math.random();
   return {
     RoomId: "12345",
@@ -24,8 +24,8 @@ const newPerson = () => {
 export function makeData(len = 5553) {
   return range(len).map(d => {
     return {
-      ...newPerson(),
-      children: range(10).map(newPerson)
+      ...newRoom(),
+      children: range(10).map(newRoom)
     };
   });
 }

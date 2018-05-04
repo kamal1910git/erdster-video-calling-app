@@ -1,18 +1,31 @@
 import React from "react";
 import _ from "lodash";
 import { makeData, Tips } from "./Utils";
+import $ from 'jquery'
 
 // Import React Table
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
-const rawData = makeData();
+var roomListData= null;
+$.ajax({  
+  url: "api/GetRoomlist",  
+  type: "GET",  
+  dataType: 'json',  
+  ContentType: 'application/json',  
+  success: function(data) {
+    roomListData = data;           
+  }.bind(this),  
+  error: function(jqXHR) {  
+    console.log(jqXHR);               
+  }.bind(this)  
+}); 
 
 const requestData = (pageSize, page, sorted, filtered) => {
   return new Promise((resolve, reject) => {
     // You can retrieve your data however you want, in this case, we will just use some local data.
-    let filteredData = rawData;
-
+    let filteredData = roomListData;
+    console.log("data length:" + roomListData.length);
     // You can use the filters in your request, but you are responsible for applying them.
     if (filtered.length) {
       filteredData = filtered.reduce((filteredSoFar, nextFilter) => {
@@ -52,7 +65,7 @@ export default class RoomsTable extends React.Component {
   constructor() {
     super();
     this.state = {
-      data: [],
+      roomListData: [],
       pages: null,
       loading: true
     };
@@ -62,6 +75,8 @@ export default class RoomsTable extends React.Component {
   fetchData(state, instance) {
     this.setState({ loading: true });
     
+   console.log("data length:" + roomListData.length);
+
     requestData(
       state.pageSize,
       state.page,

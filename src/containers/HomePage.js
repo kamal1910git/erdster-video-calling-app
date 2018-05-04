@@ -18,7 +18,7 @@ class HomePage extends React.Component {
   }
 
   getInitialState = () => {  
-    return { RoomId: '' ,RoomName: '',StorageURL:'',AssignedTo:'',CreatedBy:'', UpdatedBy:'',data1: []};  
+    return { RoomId: '',RoomUrl:'',RoomName: '',StorageURL:'',AssignedTo:'',CreatedBy:'', UpdatedBy:'',data1: []};  
   }
   
   setRoom = () => this.setState({value: new Date() - new Date().setHours(0, 0, 0, 0)})
