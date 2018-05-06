@@ -4,13 +4,12 @@ var ObjectId = require('mongodb').ObjectID;
 module.exports = function(app) {
 
 var mongo = require("mongoose");  
-var db = mongo.connect("mongodb://localhost:27017/PRC_Videocalling", function(err, response){  
+var db = mongo.connect("mongodb://mongodbuser:welcome123@ds215910.mlab.com:15910/videocalling", function(err, response){  
    if(err)
    { console.log('Failed to connect to ' + db); }  
    else
    { console.log('Connected to ' + db); }  
 });  
-  
   
 module.exports =db;
 
