@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import store from '../store'
 import io from 'socket.io-client'
 import { Offline, Online } from 'react-detect-offline';
+import $ from 'jquery'
+import API_CONSTANT_MAP from '../components/apiMap'
 
 class RoomPage extends React.Component {
   constructor(props) {
@@ -23,6 +25,45 @@ class RoomPage extends React.Component {
 
   componentWillMount() {
     this.props.addRoom();
+    
+    $.ajax({  
+      url: API_CONSTANT_MAP.getroomlistbyname + JSON.parse(localStorage.getItem('PRCUser_RoomId')),  
+      type: "GET",  
+      dataType: 'json',  
+      ContentType: 'application/json',  
+      success: function(data) {
+        var roomListData = data;
+        if(roomListData != null || roomListData !="" || roomListData != undefined || roomListData.length > 0)
+        {
+          if(roomListData[0].Status == "Active" && roomListData[0].IsActive)
+          {
+            console.log("Room is active now..");             
+          }
+          else
+          {
+            alert("Invalid room/room is inactive..");
+          }
+        } 
+        else
+          {
+            alert("Invalid room/room is inactive..");
+            localStorage.clear('PRCUser_Token');
+            localStorage.clear('PRCUser_User');
+            localStorage.clear('PRCUser_RoomId');
+            localStorage.clear('PRCUser_Record');
+            this.context.router.push('/');
+          }          
+      }.bind(this),  
+      error: function(jqXHR) {  
+        console.log(jqXHR);     
+        localStorage.clear('PRCUser_Token');
+        localStorage.clear('PRCUser_User');
+        localStorage.clear('PRCUser_RoomId');
+        localStorage.clear('PRCUser_Record');
+        this.context.router.push('/');          
+      }.bind(this)  
+    }); 
+    
   }
   render(){
     return (   
