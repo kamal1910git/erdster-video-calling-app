@@ -4,7 +4,7 @@ var ObjectId = require('mongodb').ObjectID;
 module.exports = function(app) {
 
 var mongo = require("mongoose");  
-var db = mongo.connect(process.env.MONGODB_SERVER, function(err, response){  
+var db = mongo.connect("process.env.MONGODB_SERVER", function(err, response){  
    if(err)
    { console.log('Failed to connect to ' + db); }  
    else
@@ -29,7 +29,7 @@ module.exports =db;
 
     var model = mongoose.model('RoomListModel', RoomListModelSchema, 'RoomListModel');  
 
-    app.post('/api/SaveRoomList', function (req, res) {  
+    app.post('/api/v0/SaveRoomList', function (req, res) {  
         var roomList = new model(req.body);  
         roomList.save(function(err,data){  
             if(err){  
@@ -41,7 +41,7 @@ module.exports =db;
         });  
     })
 
-    app.post("/api/UpdateRoomlist",function(req,res) {   
+    app.post("/api/v0/UpdateRoomlist",function(req,res) {   
         model.findByIdAndUpdate(req.body.RoomId, { RoomName: req.body.RoomName, RoomUrl: req.body.RoomUrl, StorageURL: req.body.StorageURL, AssignedTo: req.body.AssignedTo, UpdatedBy:req.body.UpdatedBy, IsActive:req.body.IsActive, IsDeleted:req.body.IsDeleted },   
         function(err) {  
             if (err) {  
@@ -52,7 +52,7 @@ module.exports =db;
             });  
     })
 
-    app.post("/api/RemoveRoomlist",function(req,res){   
+    app.post("/api/v0/RemoveRoomlist",function(req,res){   
         model.remove({ RoomId: req.body.RoomId }, function(err) {  
             if(err){  
                 res.send(err);  
@@ -63,7 +63,7 @@ module.exports =db;
             });  
        })
 
-       app.get("/api/GetRoomlist",function(req,res){   
+       app.get("/api/v0/GetRoomlist",function(req,res){   
         model.find({},function(err,data){  
             if(err){  
                 res.send(err);  
@@ -74,7 +74,7 @@ module.exports =db;
             });  
        }) 
 
-       app.get("/api/GetRoomlistByName/:RoomId",function(req,res){  
+       app.get("/api/v0/GetRoomlistByName/:RoomId",function(req,res){  
         model.find({RoomId: req.params.RoomId},function(err,data){  
             if(err){  
                 res.send(err);  

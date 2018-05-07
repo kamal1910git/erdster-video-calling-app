@@ -2,6 +2,7 @@ import React from "react";
 import _ from "lodash";
 import { makeData, Tips } from "./Utils";
 import $ from 'jquery'
+import API_CONSTANT_MAP from './apiMap'
 
 // Import React Table
 import ReactTable from "react-table";
@@ -9,7 +10,7 @@ import "react-table/react-table.css";
 
 var roomListData= null;
 $.ajax({  
-  url: "api/GetRoomlist",  
+  url: API_CONSTANT_MAP.getroomlist,  
   type: "GET",  
   dataType: 'json',  
   ContentType: 'application/json',  

@@ -4,6 +4,7 @@ import { Offline, Online } from 'react-detect-offline';
 import $ from 'jquery'
 import Home from '../components/Home'
 import store from '../store'
+import API_CONSTANT_MAP from '../components/apiMap'
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class HomePage extends React.Component {
     
     var room = null;
     $.ajax({  
-      url: "/api/GetRoomlistByName/" + this.state.value,  
+      url: API_CONSTANT_MAP.getroomlistbyname + this.state.value,  
       type: "GET",  
       dataType: 'json',  
       ContentType: 'application/json',  
@@ -48,7 +49,7 @@ class HomePage extends React.Component {
             'UpdatedBy':""      
           }      
           $.ajax({  
-            url: "/api/SaveRoomList",  
+            url: API_CONSTANT_MAP.saveroomlist,  
             dataType: 'json',  
             type: 'POST',  
             data: roomList,  

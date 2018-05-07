@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 
 module.exports = function(app) {
-    app.post('/sendemail', function (req, res) {  
+    app.post('/api/v0/sendemail', function (req, res) {  
         
         var to = req.body.toemail; 
         var from = process.env.SMTP_SENDER;
