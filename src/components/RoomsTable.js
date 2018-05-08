@@ -93,24 +93,31 @@ export default class RoomsTable extends React.Component {
   }
 
   handleDeleteButtonClick= (e,row) => {
-    var removeRoom = {  
-      'RoomId': row.RoomId
-    }
-    var msg = "Room has been removed...";
-    $.ajax({  
-      url: API_CONSTANT_MAP.removeroomlist,  
-      dataType: 'json',  
-      type: 'POST',  
-      data: removeRoom,  
-      success: function(data) {
-          console.log("room removed..");
-          alert(msg);
-          window.location.reload();        
-      }.bind(this),  
-      error: function(xhr, status, err) {  
-        console.log(err);
-      }.bind(this)  
-    });    
+
+    var x = confirm("Are you sure you want to remove the room?");
+    if (x)
+        {
+          var removeRoom = {  
+            'RoomId': row.RoomId
+          }
+          var msg = "Room has been removed...";
+          $.ajax({  
+            url: API_CONSTANT_MAP.removeroomlist,  
+            dataType: 'json',  
+            type: 'POST',  
+            data: removeRoom,  
+            success: function(data) {
+                console.log("room removed..");
+                alert(msg);
+                window.location.reload();        
+            }.bind(this),  
+            error: function(xhr, status, err) {  
+              console.log(err);
+            }.bind(this)  
+          });    
+        }
+    else
+      return false;       
   }
 
   fetchData(state, instance) {
