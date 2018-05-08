@@ -1,28 +1,17 @@
 import React from "react";
 import _ from "lodash";
-import { makeData, Tips } from "./Utils";
 import $ from 'jquery'
-import API_CONSTANT_MAP from './apiMap'
+import { Link } from 'react-router';
 
 // Import React Table
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
-var roomListData= null;
-$.ajax({  
-  url: API_CONSTANT_MAP.getroomlist,  
-  type: "GET",  
-  dataType: 'json',  
-  ContentType: 'application/json',  
-  success: function(data) {
-    roomListData = data;           
-  }.bind(this),  
-  error: function(jqXHR) {  
-    console.log(jqXHR);               
-  }.bind(this)  
-}); 
+import { makeData, Tips, getRoomList } from "./Utils";
+import API_CONSTANT_MAP from './apiMap'
 
-const requestData = (pageSize, page, sorted, filtered) => {
+const requestData = (pageSize, page, sorted, filtered, roomListData) => {
+
   return new Promise((resolve, reject) => {
     // You can retrieve your data however you want, in this case, we will just use some local data.
     let filteredData = roomListData;
@@ -73,23 +62,67 @@ export default class RoomsTable extends React.Component {
     this.fetchData = this.fetchData.bind(this);
   }
 
-  fetchData(state, instance) {
-    this.setState({ loading: true });
-    
-   console.log("data length:" + roomListData.length);
-
-    requestData(
-      state.pageSize,
-      state.page,
-      state.sorted,
-      state.filtered
-    ).then(res => {
-      this.setState({
-        data: res.rows,
-        pages: res.pages,
-        loading: false
-      });
+  handleButtonClick= (e,row,action) => { 
+    var updatedRoomList = {  
+      'RoomId': row.RoomId,
+      'RoomName': row.RoomName,
+      'RoomUrl': row.RoomUrl,
+      'Status': action === 'DeActivate' ? 'InActive' : 'Active',  
+      'StorageURL':row.StorageURL,  
+      'AssignedTo':row.AssignedTo,  
+      'CreatedBy':row.CreatedBy,   
+      'UpdatedBy':JSON.parse(localStorage.getItem('PRCUser_User')),
+      'IsActive': row.IsActive,
+      'IsDeleted': row.IsDeleted
+    }
+    var msg = action === 'DeActivate' ? "Room has been de-activated" : "Room has been activated";
+    $.ajax({  
+      url: API_CONSTANT_MAP.updateroomlist,  
+      dataType: 'json',  
+      type: 'POST',  
+      data: updatedRoomList,  
+      success: function(data) {
+          console.log("roomlist updated..");
+          alert(msg);
+          window.location.reload();        
+      }.bind(this),  
+      error: function(xhr, status, err) {  
+        console.log(err);
+      }.bind(this)  
     });
+    
+  }
+
+  fetchData(state, instance) {
+   this.setState({ loading: true });
+   var roomListData = null;
+    $.ajax({  
+      url: API_CONSTANT_MAP.getroomlist,  
+      type: "GET",  
+      dataType: 'json',  
+      ContentType: 'application/json',  
+      success: function(data) {
+        roomListData = data;   
+        console.log("data length:" + roomListData.length);
+        requestData(
+          state.pageSize,
+          state.page,
+          state.sorted,
+          state.filtered,
+          roomListData
+        ).then(res => {
+          this.setState({
+            data: res.rows,
+            pages: res.pages,
+            loading: false
+          });
+        });   
+
+      }.bind(this),  
+      error: function(jqXHR) {  
+        console.log(jqXHR);               
+      }.bind(this)  
+    });    
   }
   render() {
     const { data, pages, loading } = this.state;
@@ -107,7 +140,12 @@ export default class RoomsTable extends React.Component {
             },
             {
               Header: "Room URL",
-              accessor: "RoomUrl"
+              accessor: "RoomUrl",
+              Cell: ({ row }) => (row.Status ==='InActive' ?
+                        <span>{row.RoomUrl}</span>
+                        :
+                        <Link target="_blank" to={{ pathname: row.RoomUrl }}>{row.RoomUrl}</Link>
+                       )
             },
             {
               Header: "Status",
@@ -124,6 +162,14 @@ export default class RoomsTable extends React.Component {
             {
               Header: "Created By",
               accessor: "CreatedBy"
+            },
+            {
+              Header: "Action",              
+              Cell: ({ row }) => (row.Status ==='InActive' ?
+                                 <button onClick={(e) => this.handleButtonClick(e, row, 'Activate')}>Activate</button>
+                                 :
+                                 <button onClick={(e) => this.handleButtonClick(e, row, 'DeActivate')}>DeActivate</button>
+                               )
             }
           ]}
           manual 

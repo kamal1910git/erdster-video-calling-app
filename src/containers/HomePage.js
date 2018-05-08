@@ -43,6 +43,7 @@ class HomePage extends React.Component {
             'RoomId': this.state.value,  
             'RoomName': this.state.value,
             'RoomUrl': window.location.origin + '/r/' + this.state.value,
+            'Status': 'InActive',
             'StorageURL':"",  
             'AssignedTo':"",  
             'CreatedBy':JSON.parse(localStorage.getItem('PRCUser_User')),  
@@ -55,9 +56,8 @@ class HomePage extends React.Component {
             data: roomList,  
             success: function(data) {
                 console.log("roomlist created..")
-                this.setState(this.getInitialState());  
-                this.context.router.push('r/' + this.state.value);
-                
+                this.setState(this.getInitialState()); 
+                alert("Room has created..");            
             }.bind(this),  
             error: function(xhr, status, err) {  
               console.log(err);

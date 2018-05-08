@@ -34,3 +34,19 @@ export const Tips = () =>
   <div style={{ textAlign: "center" }}>
     <em>Tip: Hold shift when sorting to multi-sort!</em>
   </div>;
+
+export function getRoomList(){
+  $.ajax({  
+    url: API_CONSTANT_MAP.getroomlist,  
+    type: "GET",  
+    dataType: 'json',  
+    ContentType: 'application/json',  
+    success: function(data) {
+      return {data};           
+    }.bind(this),  
+    error: function(jqXHR) {  
+      console.log(jqXHR); 
+      return{jqXHR};
+    }.bind(this)  
+  });
+}

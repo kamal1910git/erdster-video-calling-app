@@ -18,7 +18,7 @@ module.exports =db;
         RoomName: String,   
         RoomUrl: String, 
         DateOpened: { type: Date, default: Date.now },    
-        Status: { type: String, default: "Active" },
+        Status: { type: String, default: "InActive" },
         StorageURL: String,
         AssignedTo: String,
         CreatedBy: String,
@@ -42,7 +42,7 @@ module.exports =db;
     })
 
     app.post("/api/v0/UpdateRoomlist",function(req,res) {   
-        model.findByIdAndUpdate(req.body.RoomId, { RoomName: req.body.RoomName, RoomUrl: req.body.RoomUrl, StorageURL: req.body.StorageURL, AssignedTo: req.body.AssignedTo, UpdatedBy:req.body.UpdatedBy, IsActive:req.body.IsActive, IsDeleted:req.body.IsDeleted },   
+        model.updateOne({RoomId: req.body.RoomId}, { $set: { RoomName: req.body.RoomName, RoomUrl: req.body.RoomUrl, Status: req.body.Status, StorageURL: req.body.StorageURL, AssignedTo: req.body.AssignedTo, UpdatedBy:req.body.UpdatedBy, IsActive:req.body.IsActive, IsDeleted:req.body.IsDeleted }},   
         function(err) {  
             if (err) {  
                 res.send(err);  
