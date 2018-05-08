@@ -82,15 +82,35 @@ export default class RoomsTable extends React.Component {
       type: 'POST',  
       data: updatedRoomList,  
       success: function(data) {
-          console.log("roomlist updated..");
+          console.log("room updated..");
           alert(msg);
           window.location.reload();        
       }.bind(this),  
       error: function(xhr, status, err) {  
         console.log(err);
       }.bind(this)  
-    });
-    
+    });    
+  }
+
+  handleDeleteButtonClick= (e,row) => {
+    var removeRoom = {  
+      'RoomId': row.RoomId
+    }
+    var msg = "Room has been removed...";
+    $.ajax({  
+      url: API_CONSTANT_MAP.removeroomlist,  
+      dataType: 'json',  
+      type: 'POST',  
+      data: removeRoom,  
+      success: function(data) {
+          console.log("room removed..");
+          alert(msg);
+          window.location.reload();        
+      }.bind(this),  
+      error: function(xhr, status, err) {  
+        console.log(err);
+      }.bind(this)  
+    });    
   }
 
   fetchData(state, instance) {
@@ -164,12 +184,16 @@ export default class RoomsTable extends React.Component {
               accessor: "CreatedBy"
             },
             {
-              Header: "Action",              
+              Header: "Activate Room",              
               Cell: ({ row }) => (row.Status ==='InActive' ?
                                  <button onClick={(e) => this.handleButtonClick(e, row, 'Activate')}>Activate</button>
                                  :
-                                 <button onClick={(e) => this.handleButtonClick(e, row, 'DeActivate')}>DeActivate</button>
+                                 <button onClick={(e) => this.handleButtonClick(e, row, 'DeActivate')}>Deactivate</button>
                                )
+            },
+            {
+              Header: "Remove Room",
+              Cell: ({ row }) => (<button onClick={(e) => this.handleDeleteButtonClick(e, row)}>Remove</button>)              
             }
           ]}
           manual 

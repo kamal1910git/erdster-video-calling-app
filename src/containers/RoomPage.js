@@ -13,9 +13,13 @@ class RoomPage extends React.Component {
     super(props);
   }
   state = {
-    roomId: JSON.parse(localStorage.getItem('PRCUser_RoomId'))
+    roomId: window.location.pathname.replace('/r/','').trim()
   }
   
+  static contextTypes = {
+    router: React.PropTypes.object
+  }
+
   getUserMedia = navigator.mediaDevices.getUserMedia({
     audio: true,
     video: true
@@ -25,23 +29,31 @@ class RoomPage extends React.Component {
 
   componentWillMount() {
     this.props.addRoom();
-    
+  }
+
+  componentDidMount(){
+    console.log(window.location.pathname.replace('/r/','').trim());
     $.ajax({  
-      url: API_CONSTANT_MAP.getroomlistbyname + JSON.parse(localStorage.getItem('PRCUser_RoomId')),  
+      url: API_CONSTANT_MAP.getroomlistbyname + window.location.pathname.replace('/r/','').trim(),  
       type: "GET",  
       dataType: 'json',  
       ContentType: 'application/json',  
-      success: function(data) {
-        var roomListData = data;
-        if(roomListData != null || roomListData !="" || roomListData != undefined || roomListData.length > 0)
+      success: function(data) {     
+        if(data != undefined && data.length > 0)
         {
-          if(roomListData[0].Status == "Active" && roomListData[0].IsActive)
+          console.log(data);
+          if(data[0].Status == "Active" && data[0].IsActive)
           {
             console.log("Room is active now..");             
           }
           else
           {
             alert("Invalid room/room is inactive..");
+            localStorage.clear('PRCUser_Token');
+            localStorage.clear('PRCUser_User');
+            localStorage.clear('PRCUser_RoomId');
+            localStorage.clear('PRCUser_Record');
+            this.context.router.push('/');
           }
         } 
         else
@@ -63,8 +75,8 @@ class RoomPage extends React.Component {
         this.context.router.push('/');          
       }.bind(this)  
     }); 
-    
   }
+
   render(){
     return (   
       <div>
