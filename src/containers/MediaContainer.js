@@ -107,7 +107,7 @@ export default class MediaBridge extends React.Component {
         data: this.state.recordVideo.blob,
         id: Math.floor(Math.random()*90000) + 10000
       }
-      
+
       if(isRecord)
       {
         console.log('Recording upload started...');
@@ -124,7 +124,7 @@ export default class MediaBridge extends React.Component {
     }
     else
     {
-      console.log("Nothing uploaded...")
+      console.log("Nothing uploaded...");
     }   
     });
   }

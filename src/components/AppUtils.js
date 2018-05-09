@@ -42,7 +42,8 @@
         xhr.onload = function() {
           console.log('xhr status:' + xhr.status);
           if (xhr.status === 200) {
-            console.log(xhr.status)
+            console.log(s3Info.signedUrl);
+            console.log(xhr.status);
             resolve(true);
           } else {
             console.log('error status ' + xhr.status)
