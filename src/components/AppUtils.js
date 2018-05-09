@@ -1,7 +1,7 @@
 
   // handle S3 upload
-  function getSignedUrl(file) {
-    let queryString = '?objectName=' + (JSON.parse(localStorage.getItem('PRCUser_RoomId')) + "_" + file.id) + '&contentType=' + encodeURIComponent(file.type);
+  function getSignedUrl(file, roomId) {
+    let queryString = '?objectName=' + (roomId + "_" + file.id) + '&contentType=' + encodeURIComponent(file.type);
     console.log("signed url queryString" + queryString);
     return fetch('/s3/sign' + queryString)
     .then((response) => {
@@ -31,9 +31,9 @@
     return xhr;
   };
   
-  export function S3Upload(fileInfo) { //parameters: { type, data, id }
+  export function S3Upload(fileInfo, roomId) { //parameters: { type, data, id }
     return new Promise((resolve, reject) => {
-      getSignedUrl(fileInfo)
+      getSignedUrl(fileInfo, roomId)
       .then((s3Info) => {
         
         // upload to S3

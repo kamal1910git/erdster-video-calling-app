@@ -11,6 +11,8 @@ import API_CONSTANT_MAP from '../components/apiMap'
 class RoomPage extends React.Component {
   constructor(props) {
     super(props);
+
+    this.clearLocalStorage();    
   }
   state = {
     roomId: window.location.pathname.replace('/r/','').trim()
@@ -26,6 +28,13 @@ class RoomPage extends React.Component {
   }).catch(e => alert('getUserMedia() error: ' + e.name))
 
   socket = io.connect()
+
+  clearLocalStorage = () => {
+    localStorage.clear('PRCUser_Token');
+    localStorage.clear('PRCUser_User');
+    localStorage.clear('PRCUser_RoomId');
+    localStorage.clear('PRCUser_Record');
+  }
 
   componentWillMount() {
     this.props.addRoom();
@@ -47,19 +56,13 @@ class RoomPage extends React.Component {
           else
           {
             alert("Invalid room/room is inactive, please verify the room in the room list.");
-            localStorage.clear('PRCUser_Token');
-            localStorage.clear('PRCUser_User');
-            localStorage.clear('PRCUser_RoomId');
-            localStorage.clear('PRCUser_Record');
+            this.clearLocalStorage();
             this.context.router.push('/');
           }         
       }.bind(this),  
       error: function(jqXHR) {  
-        console.log(jqXHR);     
-        localStorage.clear('PRCUser_Token');
-        localStorage.clear('PRCUser_User');
-        localStorage.clear('PRCUser_RoomId');
-        localStorage.clear('PRCUser_Record');
+        console.log(jqXHR);    
+        this.clearLocalStorage();
         this.context.router.push('/');          
       }.bind(this)  
     }); 

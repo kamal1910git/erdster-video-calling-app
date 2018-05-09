@@ -107,11 +107,12 @@ export default class MediaBridge extends React.Component {
         data: this.state.recordVideo.blob,
         id: Math.floor(Math.random()*90000) + 10000
       }
+      
       if(isRecord)
       {
         console.log('Recording upload started...');
         // Upload video to S3   
-        S3Upload(params)
+        S3Upload(params, window.location.pathname.replace('/r/','').trim())
         .then((success) => {
           console.log('enter then statement');
           if(success) {
