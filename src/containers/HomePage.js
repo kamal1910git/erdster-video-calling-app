@@ -47,8 +47,11 @@ class HomePage extends React.Component {
             'StorageURL':"",  
             'AssignedTo':"",  
             'CreatedBy':JSON.parse(localStorage.getItem('PRCUser_User')),  
-            'UpdatedBy':""      
-          }      
+            'UpdatedBy':"",
+            'IsActive' : true,
+            'IsDeleted': false
+          }
+
           $.ajax({  
             url: API_CONSTANT_MAP.saveroomlist,  
             dataType: 'json',  
@@ -57,7 +60,7 @@ class HomePage extends React.Component {
             success: function(data) {
                 console.log("roomlist created..")
                 this.setState(this.getInitialState()); 
-                alert("Room has created..");            
+                alert("Room has been created, please go to room list and activate the room.");            
             }.bind(this),  
             error: function(xhr, status, err) {  
               console.log(err);
@@ -66,7 +69,7 @@ class HomePage extends React.Component {
         }
         else
         {
-          alert("RoomId is already exists.");
+          alert("Room Id is already exists.");
         }        
       }.bind(this),  
       error: function(jqXHR) {  

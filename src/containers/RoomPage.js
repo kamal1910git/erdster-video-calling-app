@@ -39,32 +39,20 @@ class RoomPage extends React.Component {
       dataType: 'json',  
       ContentType: 'application/json',  
       success: function(data) {     
-        if(data != undefined && data.length > 0)
-        {
-          console.log(data);
-          if(data[0].Status == "Active" && data[0].IsActive)
+          console.log("status:" + data[0].Status);
+          if(data[0].Status == "Active")
           {
             console.log("Room is active now..");             
           }
           else
           {
-            alert("Invalid room/room is inactive..");
+            alert("Invalid room/room is inactive, please verify the room in the room list.");
             localStorage.clear('PRCUser_Token');
             localStorage.clear('PRCUser_User');
             localStorage.clear('PRCUser_RoomId');
             localStorage.clear('PRCUser_Record');
             this.context.router.push('/');
-          }
-        } 
-        else
-          {
-            alert("Invalid room/room is inactive..");
-            localStorage.clear('PRCUser_Token');
-            localStorage.clear('PRCUser_User');
-            localStorage.clear('PRCUser_RoomId');
-            localStorage.clear('PRCUser_Record');
-            this.context.router.push('/');
-          }          
+          }         
       }.bind(this),  
       error: function(jqXHR) {  
         console.log(jqXHR);     
