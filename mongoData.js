@@ -4,7 +4,7 @@ var ObjectId = require('mongodb').ObjectID;
 module.exports = function(app) {
 
 var mongo = require("mongoose");  
-var db = mongo.connect(process.env.MONGODB_SERVER, function(err, response){   
+var db = mongo.connect(process.env.MONGODB_SERVER, function(err, response){    
    if(err)
    { console.log('Failed to connect to ' + db); }  
    else
@@ -71,7 +71,7 @@ module.exports =db;
             else{             
                 res.send(data);  
                 }  
-            });  
+            }).sort({"DateOpened":-1});  
        }) 
 
        app.get("/api/v0/GetRoomlistByName/:RoomId",function(req,res){  

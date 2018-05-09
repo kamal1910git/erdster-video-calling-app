@@ -6,7 +6,7 @@ import Communication from '../components/Communication'
 import store from '../store'
 import { connect } from 'react-redux'
 import $ from 'jquery'
-import apiMap from '../components/apiMap'
+import API_CONSTANT_MAP from '../components/apiMap'
 
 class CommunicationContainer extends React.Component {
   constructor(props) {
@@ -123,7 +123,7 @@ class CommunicationContainer extends React.Component {
       };
       var that = this;
       const promise = $.ajax({
-        url: apiMap.API_CONSTANT_MAP.sendemail,
+        url: API_CONSTANT_MAP.sendemail,
         type: "POST",
         data: data,
         dataType: 'json'
