@@ -1,4 +1,6 @@
 
+import API_CONSTANT_MAP from '../components/apiMap'
+
   // handle S3 upload
   function getSignedUrl(file, roomId) {
     let queryString = '?objectName=' + (roomId + "_" + file.id) + '&contentType=' + encodeURIComponent(file.type);
@@ -42,12 +44,28 @@
         xhr.onload = function() {
           console.log('xhr status:' + xhr.status);
           if (xhr.status === 200) {
-            console.log(s3Info.signedUrl);
+            console.log("S3 URL: " + s3Info.signedUrl);
             console.log(xhr.status);
-            resolve(true);
+
+            var s3UrlLink = {  
+              'StorageURL':s3Info.signedUrl
+            }
+            var msg = "Video recording has been saved into aws S3.";
+            $.ajax({  
+              url: API_CONSTANT_MAP.updates3url,  
+              dataType: 'json',  
+              type: 'POST',  
+              data: s3UrlLink,  
+              success: function(data) {
+                  alert(msg);
+                  resolve(true);
+              }.bind(this),  
+              error: function(xhr, status, err) {  
+                console.log(err);
+              }.bind(this)  
+            });              
           } else {
-            console.log('error status ' + xhr.status)
-            
+            console.log('error status ' + xhr.status)            
             reject(xhr.status);
           }
         };

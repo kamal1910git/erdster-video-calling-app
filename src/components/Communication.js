@@ -105,6 +105,7 @@ Communication.propTypes = {
   getContent: React.PropTypes.func.isRequired,
   send: React.PropTypes.func.isRequired,
   handleHangup: React.PropTypes.func.isRequired,
+  stopRecording: React.PropTypes.func.isRequired,
   handleInput: React.PropTypes.func.isRequired,
   handleInvitation: React.PropTypes.func.isRequired,
   handleCopyLinkClick: React.PropTypes.func.isRequired,

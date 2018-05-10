@@ -4,7 +4,7 @@ var ObjectId = require('mongodb').ObjectID;
 module.exports = function(app) {
 
 var mongo = require("mongoose");  
-var db = mongo.connect(process.env.MONGODB_SERVER, function(err, response){    
+var db = mongo.connect("mongodb://localhost:27017/PRC_Videocalling", function(err, response){    
    if(err)
    { console.log('Failed to connect to ' + db); }  
    else
@@ -49,6 +49,17 @@ module.exports =db;
                 return;  
             }  
                 res.send({data:"Roomlist has been updated..!!"});  
+            });  
+    })
+
+    app.post("/api/v0/UpdateS3Url",function(req,res) {   
+        model.updateOne({RoomId: req.body.RoomId}, { $set: { StorageURL: req.body.StorageURL }},   
+        function(err) {  
+            if (err) {  
+                res.send(err);  
+                return;  
+            }  
+                res.send({data:"S3 URL has been updated..!!"});  
             });  
     })
 

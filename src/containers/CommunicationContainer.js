@@ -111,6 +111,10 @@ class CommunicationContainer extends React.Component {
     localStorage.setItem('PRCUser_Record', JSON.stringify(!isRecord));
     this.setState({record: JSON.parse(localStorage.getItem('PRCUser_Record'))});
     this.props.setRecord(JSON.parse(localStorage.getItem('PRCUser_Record')));
+    if(isRecord)
+    {
+      this.stopRecording();
+    }
   }
 
   handleSendEmailClick = () => {
@@ -148,6 +152,8 @@ class CommunicationContainer extends React.Component {
       });
   }
 
+  stopRecording = () => this.props.media.stopRecord()
+
   handleHangup = () => this.props.media.hangup()
   render(){
     return (      
@@ -159,6 +165,7 @@ class CommunicationContainer extends React.Component {
         getContent={this.getContent}
         send={this.send}
         handleHangup={this.handleHangup}
+        stopRecording={this.stopRecording}
         handleInput={this.handleInput}
         handleInvitation={this.handleInvitation}
         handleCopyLinkClick={this.toggleModal} 

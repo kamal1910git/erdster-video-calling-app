@@ -80,6 +80,7 @@ export default class MediaBridge extends React.Component {
   setDescription = offer => this.pc.setLocalDescription(offer)
   // send the offer to a server to be forwarded to the other peer
   sendDescription = () => this.props.socket.send(this.pc.localDescription)
+  
   hangup() {
     this.setState({user: 'guest', bridge: 'guest-hangup'});
     this.pc.close();
@@ -108,27 +109,21 @@ export default class MediaBridge extends React.Component {
         id: Math.floor(Math.random()*90000) + 10000
       }
 
-      if(isRecord)
-      {
-        console.log('Recording upload started...');
-        // Upload video to S3   
-        S3Upload(params, window.location.pathname.replace('/r/','').trim())
-        .then((success) => {
-          console.log('enter then statement');
-          if(success) {
-            console.log(success);
-          }
-        }, (error) => {
-          alert(error, 'error occurred. check your aws settings and try again.');
-        })
-    }
-    else
-    {
-      console.log("Nothing uploaded...");
-    }   
+      //Upload video recording to S3
+      console.log('Recording upload started...');
+      // Upload video to S3   
+      S3Upload(params, window.location.pathname.replace('/r/','').trim())
+      .then((success) => {
+        console.log('enter then statement');
+        if(success) {
+          console.log(success);
+        }
+      }, (error) => {
+        alert(error, 'error occurred. check your aws settings and try again.');
+      })
+
     });
   }
-
 
   handleError = e => console.log(e)
   init() {
