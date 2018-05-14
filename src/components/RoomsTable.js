@@ -191,6 +191,10 @@ export default class RoomsTable extends React.Component {
               accessor: "CreatedBy"
             },
             {
+              Header: "Created On",
+              accessor: "DateOpened"              
+            },            
+            {
               Header: "Activate Room",              
               Cell: ({ row }) => (row.Status ==='InActive' ?
                                  <button onClick={(e) => this.handleButtonClick(e, row, 'Activate')}>Activate</button>
