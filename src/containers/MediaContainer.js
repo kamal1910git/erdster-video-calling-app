@@ -18,6 +18,11 @@ export default class MediaBridge extends React.Component {
     recordVideo: null,
     dataStream: null
   }
+
+  static contextTypes = {
+    router: React.PropTypes.object
+  }
+
   componentWillMount() {
     // chrome polyfill for connection between the local device and a remote peer
     window.RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection;
@@ -73,7 +78,7 @@ export default class MediaBridge extends React.Component {
       };
       this.dc.onclose = () => {
         this.remoteStream.getVideoTracks()[0].stop();
-        this.stopRecord();
+        this.stopRecord("");
         console.log('The Data Channel is Closed');
       };
   }
@@ -95,11 +100,11 @@ export default class MediaBridge extends React.Component {
     this.state.recordVideo = RecordRTC(this.state.dataStream, { type: 'video' });
       this.state.recordVideo.startRecording();
     setTimeout(() => {
-      this.stopRecord();
+      this.stopRecord("");
     }, 200000);
   }
 
-  stopRecord() {
+  stopRecord(operation) {
     var isRecord = JSON.parse(localStorage.getItem('PRCUser_Record'));
     console.log('Recording stopping...' + isRecord);
     this.state.recordVideo.stopRecording(() => {
@@ -117,9 +122,17 @@ export default class MediaBridge extends React.Component {
         console.log('enter then statement');
         if(success) {
           console.log(success);
+          if(operation == 'exit')
+          {
+            this.context.router.push('/');
+          }
         }
       }, (error) => {
         alert(error, 'error occurred. check your aws settings and try again.');
+        if(operation == 'exit')
+          {
+            this.context.router.push('/');
+          }
       })
 
     });

@@ -152,7 +152,12 @@ class CommunicationContainer extends React.Component {
       });
   }
 
-  stopRecording = () => this.props.media.stopRecord()
+  stopRecording = () => this.props.media.stopRecord("")
+
+  handleExit = () => 
+  {
+    this.props.media.stopRecord('exit');
+  }
 
   handleHangup = () => this.props.media.hangup()
   render(){
@@ -165,6 +170,7 @@ class CommunicationContainer extends React.Component {
         getContent={this.getContent}
         send={this.send}
         handleHangup={this.handleHangup}
+        handleExit={this.handleExit}
         stopRecording={this.stopRecording}
         handleInput={this.handleInput}
         handleInvitation={this.handleInvitation}
