@@ -5,6 +5,7 @@ import $ from 'jquery'
 import Home from '../components/Home'
 import store from '../store'
 import API_CONSTANT_MAP from '../components/apiMap'
+import SmartAlert from 'react-bootstrap-sweetalert';
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -12,7 +13,11 @@ class HomePage extends React.Component {
   }
   state = {
     value: new Date() - new Date().setHours(0, 0, 0, 0),
-    username: JSON.parse(localStorage.getItem('PRCUser_User'))    
+    username: JSON.parse(localStorage.getItem('PRCUser_User')),
+    popup: false,
+    popupMessage: null,
+    popupWarn: false,
+    popupWarnMessage: null
   }
   static contextTypes = {
     router: React.PropTypes.object
@@ -60,7 +65,8 @@ class HomePage extends React.Component {
             success: function(data) {
                 console.log("roomlist created..")
                 this.setState(this.getInitialState()); 
-                alert("Room has been created, please go to room list and activate the room.");            
+                this.setState({ popup: true });
+                this.setState({ popupMessage: "Room has been created, please go to room list and activate the room!" });
             }.bind(this),  
             error: function(xhr, status, err) {  
               console.log(err);
@@ -69,13 +75,24 @@ class HomePage extends React.Component {
         }
         else
         {
-          alert("Room Id is already exists.");
+          this.setState({ popupWarn: true });
+          this.setState({ popupWarnMessage: "Room Id is already exists!" });
         }        
       }.bind(this),  
       error: function(jqXHR) {  
         console.log(jqXHR);               
       }.bind(this)  
     });     
+  }
+
+  onPopConfirm = () =>{
+    this.setState({ popup: false });
+    this.setState({ popupMessage: null });
+  }
+
+  onPopWarnConfirm = () =>{
+    this.setState({ popupWarn: false });
+    this.setState({ popupWarnMessage: null });
   }
 
   handleChange = e => this.setState({value: e.target.value})
@@ -159,6 +176,8 @@ class HomePage extends React.Component {
   render(){
     return (
       <div>
+        <SmartAlert show={this.state.popup} success title={this.state.popupMessage} onConfirm={this.onPopConfirm} />
+        <SmartAlert show={this.state.popupWarn} warning title={this.state.popupWarnMessage} onConfirm={this.onPopWarnConfirm} />
         <nav className="navbar navbar-default navbar-fixed-top">
           <div className="container-fluid">
             <div id="navbar" className="navbar-collapse ">
@@ -215,7 +234,7 @@ class HomePage extends React.Component {
         <footer>
           <img src="assets/img/prc-logo.png" className="img-responsive pull-right footer-img" />
         </footer>
-      </div>
+      </div>      
     );
   }
 }

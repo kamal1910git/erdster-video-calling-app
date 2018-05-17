@@ -9,6 +9,7 @@ import "react-table/react-table.css";
 
 import { makeData, Tips, getRoomList } from "./Utils";
 import API_CONSTANT_MAP from './apiMap'
+import SmartAlert from 'react-bootstrap-sweetalert';
 
 const requestData = (pageSize, page, sorted, filtered, roomListData) => {
 
@@ -57,7 +58,9 @@ export default class RoomsTable extends React.Component {
     this.state = {
       roomListData: [],
       pages: null,
-      loading: true
+      loading: true,
+      popup: false,
+      popupMessage: null
     };
     this.fetchData = this.fetchData.bind(this);
   }
@@ -83,8 +86,8 @@ export default class RoomsTable extends React.Component {
       data: updatedRoomList,  
       success: function(data) {
           console.log("room updated..");
-          alert(msg);
-          window.location.reload();        
+          this.setState({ popup: true });
+          this.setState({ popupMessage: msg });            
       }.bind(this),  
       error: function(xhr, status, err) {  
         console.log(err);
@@ -108,8 +111,8 @@ export default class RoomsTable extends React.Component {
             data: removeRoom,  
             success: function(data) {
                 console.log("room removed..");
-                alert(msg);
-                window.location.reload();        
+                this.setState({ popup: true });
+                this.setState({ popupMessage: msg });   
             }.bind(this),  
             error: function(xhr, status, err) {  
               console.log(err);
@@ -118,6 +121,12 @@ export default class RoomsTable extends React.Component {
         }
     else
       return false;       
+  }
+
+  onPopConfirm = () =>{
+    this.setState({ popup: false });
+    this.setState({ popupMessage: null });
+    window.location.reload();      
   }
 
   fetchData(state, instance) {
@@ -155,6 +164,7 @@ export default class RoomsTable extends React.Component {
     const { data, pages, loading } = this.state;
     return (
       <div>
+        <SmartAlert show={this.state.popup} success title={this.state.popupMessage} onConfirm={this.onPopConfirm} />
         <ReactTable
           columns={[
             {
