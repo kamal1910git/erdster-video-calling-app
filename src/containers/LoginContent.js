@@ -60,7 +60,7 @@ export default class LoginContent extends React.Component {
   }
 
   componentDidMount(){
-    document.body.className="bodyOverride";
+    document.body.className="loginpage";
   }
 
   render() {
@@ -69,7 +69,7 @@ export default class LoginContent extends React.Component {
         errorInfo = this.state.errorDescription;
       }
       return (
-      <div className="loginpage">        
+      <div>        
         <div className="container-fluid">
           <div className="container">
             <div className="row">

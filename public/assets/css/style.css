@@ -28,6 +28,7 @@ a, p, button, input, select, textarea, label, table, .panel, .style-title {
 }
 
 body {
+    min-height: 100% !important;
     height: 100%;
     background-image: url(../img/login-bg.jpg);
     background-position: center center;
@@ -158,7 +159,7 @@ footer {
     color: #7c64a8;
 }
 
-div.loginpage {
+body.loginpage {
     overflow: hidden;
 }
 
@@ -903,10 +904,10 @@ div.connt-div{position: absolute; background: #8973b1; border-radius: 3px; width
 }
     .footer-img{margin: 0 auto; width: 75px;}
     html, body{overflow: hidden;}
-    div.loginpage{overflow-y: scroll;}
+    body.loginpage{overflow-y: scroll;}
 }
 @media (max-width:767px) {
-    div.loginpage {
+    body.loginpage {
         overflow: scroll;
     }
     #navbar .navbar-nav{ float: left;}
@@ -915,7 +916,7 @@ div.connt-div{position: absolute; background: #8973b1; border-radius: 3px; width
     #navbar .navbar-right{float: right !important;}
     #navbar .navbar-nav li span.proName{display: none;}
     body{overflow: hidden;}
-    div.loginpage{overflow-y: scroll;}
+    body.loginpage{overflow-y: scroll;}
     .loginpage .carousel-caption p{display: none;}
     
 }
